@@ -6,6 +6,15 @@
 // ============================================================
 const newsData = [
     {
+    sortDate: "2026-10-13",
+    date: "Oct 13, 2026",
+    category: "tool",
+    title: "Jian's German Language Website (deutschheft)",
+    summary: "Launched a personal German learning website covering the A1–A1.2 curriculum — lessons, vocabulary, grammar (incl. Das Perfekt), word forms, reading texts, exercises, and Notion-synced notes. Bilingual Chinese–German interface.",
+    link: "https://jianwu-atlas.github.io/deutschheft/",
+    linkText: "Visit the German site →"
+  },
+  {
     sortDate: "2026-07-17",
     date: "Jul 17, 2026",
     category: "tool",
