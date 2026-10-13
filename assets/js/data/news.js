@@ -11,7 +11,7 @@ const newsData = [
     category: "tool",
     title: "Jian's German Language Website (deutschheft)",
     summary: "Launched a personal German learning website covering the A1–A1.2 curriculum — lessons, vocabulary, grammar (incl. Das Perfekt), word forms, reading texts, exercises, and Notion-synced notes. Bilingual Chinese–German interface.",
-    link: "https://jianwu-atlas.github.io/deutschheft/",
+    link: "https://deutschheft.edgeone.cool/",
     linkText: "Visit the German site →"
   },
   {
