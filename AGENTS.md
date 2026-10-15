@@ -21,5 +21,6 @@
 - 新增英文文案先补 `i18n.js` 的 en/zh 两键，再在 HTML 挂 `data-i18n`；勿在页面硬编码双语。
 
 ## 最近更新
+- 2026-10-15：`index.html` 的 `footer-copyright` 行新增个人链接 **Englishheft（个人 · 英语单词）** → https://jianwu-atlas.github.io/englishheft/（英语单词站同域子路径，与 Deutschheft 并列的姊妹站；内容为《15000 英语单词口袋书》蒸馏）。
 - 2026-10-15：全站接入中英文切换（i18n）——新增 `assets/js/i18n.js` + 导航右上角即时切换；9 个主页面与教程文章模板挂 `data-i18n`；`render.js` 加 `pick`/`pickEn`，数据文件补 `_zh` 字段；`build_tutorials.py` 支持可选 `title_en`/`summary_en`；图库英文 caption 补 `caption_zh`。
 - 2026-10-13：`index.html` 的 `footer-copyright` 行末尾新增个人链接 **Deutschheft（个人 · 德语学习）** → https://jianwu-atlas.github.io/deutschheft/（德语学习站同域子路径；国内访问用独立域名 deutschheft.edgeone.cool，不经本首页）。
