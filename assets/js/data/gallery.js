@@ -5,9 +5,6 @@ const galleryData = [
   // { type: "photo", source: "local", src: "assets/img/gallery/photo3.jpg", caption: "Conference trip", caption_zh: "会议之行" },
   // { type: "photo", source: "local", src: "assets/img/gallery/photo4.jpg", caption: "Nature walk", caption_zh: "户外漫步" },
 
-  // 照片（Google Drive 来源，保留原有条目）
-  { type: "photo", source: "drive", src: "https://drive.google.com/thumbnail?id=1p6jXfQAw9Mn75sHmMVZ9GIDLfvi2ttMA&sz=w1000", caption: "Photo from Google Drive", caption_zh: "谷歌云盘照片" },
-
   // 视频（Google Drive 来源，保留原有条目）
   { type: "video", source: "drive", src: "https://drive.google.com/file/d/1cHCGFyLsAE9JoJch5Ks019G6KGGWH_or/preview", thumb: "https://drive.google.com/thumbnail?id=1cHCGFyLsAE9JoJch5Ks019G6KGGWH_or&sz=w500", caption: "Video from Google Drive", caption_zh: "谷歌云盘视频" },
 
