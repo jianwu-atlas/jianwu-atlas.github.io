@@ -1,6 +1,7 @@
 const expertiseData = [
   {
     label:"Programming Languages",
+    label_zh:"编程语言",
     skills:[
       {type:"g", name:"R"},
       {type:"g", name:"Python"},
@@ -10,6 +11,7 @@ const expertiseData = [
   },
   {
     label:"Single-Cell Analysis",
+    label_zh:"单细胞分析",
     skills:[
       {type:"b", name:"Seurat v5"},
       {type:"b", name:"Harmony"},
@@ -23,6 +25,7 @@ const expertiseData = [
   },
   {
     label:"Epigenomics",
+    label_zh:"表观基因组学",
     skills:[
       {type:"c", name:"ATAC-seq"},
       {type:"c", name:"ChIP-seq"},
@@ -33,6 +36,7 @@ const expertiseData = [
   },
   {
     label:"Omics & Other Tools",
+    label_zh:"组学与其他工具",
     skills:[
       {type:"g", name:"Bulk RNA-seq"},
       {type:"g", name:"Spatial Transcriptomics"},

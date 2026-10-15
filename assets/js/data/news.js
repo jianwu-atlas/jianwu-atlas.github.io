@@ -8,48 +8,68 @@ const newsData = [
     {
     sortDate: "2026-10-13",
     date: "Oct 13, 2026",
+    date_zh: "2026年10月13日",
     category: "tool",
     title: "Jian's German Language Website (deutschheft)",
+    title_zh: "德语学习网站（deutschheft）上线",
     summary: "Launched a personal German learning website covering the A1–A1.2 curriculum — lessons, vocabulary, grammar (incl. Das Perfekt), word forms, reading texts, exercises, and Notion-synced notes. Bilingual Chinese–German interface.",
+    summary_zh: "上线了个人德语学习网站，覆盖 A1–A1.2 课程体系——课程、词汇、语法（含 Das Perfekt）、词形、阅读文本、练习以及与 Notion 同步的笔记。中德双语界面。",
     link: "https://jianwu-atlas.github.io/deutschheft/",
-    linkText: "Visit the German site →"
+    linkText: "Visit the German site →",
+    linkText_zh: "访问德语网站 →"
   },
   {
     sortDate: "2026-07-17",
     date: "Jul 17, 2026",
+    date_zh: "2026年7月17日",
     category: "tool",
     title: "jwtools v0.2.0: New Cell-Type Proportion Analysis Toolkit",
+    title_zh: "jwtools v0.2.0：全新细胞类型比例分析工具",
     summary: "Released jwtools v0.2.0, adding ct_proportion_analysis() for donor-level cell-type proportion statistics with pairwisse significance testing and dataset/batch overlay diagnostics, plus rename_dataset_origin() and save_dual() helper functions.",
+    summary_zh: "发布 jwtools v0.2.0，新增 ct_proportion_analysis()：支持供体水平细胞类型比例统计、两两显著性检验与 dataset/batch 覆盖诊断，并新增 rename_dataset_origin() 与 save_dual() 辅助函数。",
     link: "https://github.com/jianwu-atlas/jwtools/releases/tag/v0.2.0",
     linkText: "View Release Notes →",
+    linkText_zh: "查看 Release Notes →",
     logo: "assets/img/logos/jwtools-hex.png"
   },
   {
     sortDate: "2026-07-16",
     date: "July 16, 2026",
+    date_zh: "2026年7月16日",
     category: "tool",
     title: "Introducing jwtools: An R Package for Single-Cell & Omics Utility Functions",
+    title_zh: "jwtools 发布：单细胞与组学分析的 R 工具包",
     summary: "Released jwtools, a personal R package formalizing reusable utility functions from daily single-cell and omics analysis work — starting with qs_save_workspace() and qs_load_workspace() for fast, memory-efficient workspace snapshots via the qs format. A living package, with future additions covering single-cell QC helpers, TE/ERV quantification utilities, and large-matrix data wrangling tools. Licensed under MIT.",
+    summary_zh: "发布 jwtools——把日常单细胞与组学分析中可复用的工具函数整理成的个人 R 包。首批功能为 qs_save_workspace() 与 qs_load_workspace()，基于 qs 格式实现快速、省内存的工作区快照。这是一个持续演进的包，后续将加入单细胞 QC 辅助、TE/ERV 定量以及大矩阵数据处理工具。MIT 许可证。",
     link: "https://github.com/jianwu-atlas/jwtools",
-    linkText: "View on GitHub →"
+    linkText: "View on GitHub →",
+    linkText_zh: "在 GitHub 上查看 →"
   },
   {
     sortDate: "2026-03-05",
     date: "Mar 5, 2026",
+    date_zh: "2026年3月5日",
     category: "award",
     title: "Invited to Join the DZL DataLung Training Program (BioTrack)",
+    title_zh: "入选 DZL DataLung 培训项目（BioTrack）",
     summary: "Selected among the top candidates following expert committee review of all applications; invited by the DZL DataLung School to join the upcoming BioTrack training program, in recognition of prior qualifications and computational research experience.",
+    summary_zh: "经专家委员会对全部申请的评审，从优秀候选人中脱颖而出，获 DZL DataLung School 邀请加入即将启动的 BioTrack 培训项目，以肯定此前的资质与计算研究经验。",
     link: "https://dzl.de/en/academy-training/dzl-datalung-school-academy/",
-    linkText: "DZL DataLung School →"
+    linkText: "DZL DataLung School →",
+    linkText_zh: "DZL DataLung School →"
   },
   {
     sortDate: "2025-07-01",
     date: "Jul 1, 2025",
+    date_zh: "2025年7月1日",
     category: "team",
     title: "Launched New Academic Website",
+    title_zh: "新版学术网站上线",
     summary: "Established a new academic personal website to present ongoing research on lung aging, and single-cell atlas integration projects.",
+    summary_zh: "搭建新版个人学术网站，展示正在进行的肺衰老与单细胞图谱整合研究。",
     link: "index.html",
-    linkText: "Visit homepage →"
+    linkText: "Visit homepage →",
+    linkText_zh: "访问主页 →"
   },
   /*
   {

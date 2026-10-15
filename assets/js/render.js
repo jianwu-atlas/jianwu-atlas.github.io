@@ -1,29 +1,66 @@
 /* ============================================================
    render.js — 通用渲染引擎
    以后新增内容只需修改 assets/js/data/*.js，本文件无需改动
+------------------------------------------------------------
+   i18n 约定（与 assets/js/i18n.js 配合）：
+   - 数据对象里的 "xxx_zh" 字段是中文备选；
+     pick(obj,'xxx') 在中文模式下优先取 xxx_zh，缺失则回退 xxx。
+   - 同理 pickEn(obj,'xxx')：英文模式下优先取 xxx_en（用于
+     tutorials 这类「中文为主、可选英文」的数据），否则回退原字段。
+   - 换语言后由页面注册 window.__langCallbacks 回调重渲染，
+     渲染函数天然支持重复调用（innerHTML 全量重绘）。
 ============================================================ */
+
+/* 当前语言（i18n.js 未加载时安全回退 en） */
+function curLang(){
+  return (typeof getLang === 'function') ? getLang() : 'en';
+}
+
+/* 语言回退取值：中文模式优先 field+'_zh'，否则用原 field */
+function pick(obj, field){
+  if(!obj) return obj;
+  if(curLang() === 'zh'){
+    var zh = obj[field + '_zh'];
+    if(zh !== undefined && zh !== null && zh !== '') return zh;
+  }
+  return obj[field];
+}
+
+/* 语言回退取值（英文覆盖方向）：英文模式优先 field+'_en'，否则用原 field
+   用于 tutorials 这类「中文为主、可选英文」的数据，方向与 pick 的 _zh 相反 */
+function pickEn(obj, field){
+  if(!obj) return obj;
+  if(curLang() === 'en'){
+    var en = obj[field + '_en'];
+    if(en !== undefined && en !== null && en !== '') return en;
+  }
+  return obj[field];
+}
 
 /* 1. Experience */
 function renderExperience(containerId, data){
   const el = document.getElementById(containerId);
   if(!el) return;
-  el.innerHTML = data.map(e => `
+  el.innerHTML = data.map(e => {
+    const points = (curLang() === 'zh' && e.points_zh) ? e.points_zh : e.points;
+    return `
     <div class="exp-block">
       <div class="exp-logo">${e.icon}</div>
       <div>
-        <p class="exp-role">${e.role}</p>
-        <p class="exp-org">${e.org}</p>
-        <p class="exp-date">${e.date}</p>
+        <p class="exp-role">${pick(e, 'role')}</p>
+        <p class="exp-org">${pick(e, 'org')}</p>
+        <p class="exp-date">${pick(e, 'date')}</p>
         <div class="exp-body">
-          ${e.advisor ? `<p><strong>${e.advisor}</strong></p>` : ''}
-          <ul>${e.points.map(p => `<li>${p}</li>`).join('')}</ul>
+          ${e.advisor ? `<p><strong>${pick(e, 'advisor')}</strong></p>` : ''}
+          <ul>${points.map(p => `<li>${p}</li>`).join('')}</ul>
           <div class="tags">
-            ${e.tags.map(t => `<span class="tag tag-${t.type}">${t.label}</span>`).join('')}
+            ${e.tags.map(tg => `<span class="tag tag-${tg.type}">${pick(tg, 'label')}</span>`).join('')}
           </div>
         </div>
       </div>
     </div>
-  `).join('');
+  `;
+  }).join('');
 }
 
 /* 2. Publications */
@@ -36,11 +73,11 @@ function renderPublications(containerId, data, featuredOnly = false){
       <span class="pub-num">${i + 1}</span>
       <div>
         <span class="pub-badge badge-${p.badgeType}">${p.badge}</span>
-        <p class="pub-title">${p.title}</p>
+        <p class="pub-title">${pick(p, 'title')}</p>
         <p class="pub-authors">${p.authors}</p>
         <p class="pub-journal">${p.journal || ''}</p>
         <div class="pub-links">
-          ${p.links.map(l => `<a href="${l.url}" class="pub-link ${l.primary ? 'primary' : ''}" target="_blank">${l.label}</a>`).join('')}
+          ${p.links.map(l => `<a href="${l.url}" class="pub-link ${l.primary ? 'primary' : ''}" target="_blank">${pick(l, 'label')}</a>`).join('')}
         </div>
       </div>
     </div>
@@ -54,7 +91,7 @@ function renderConferences(containerId, data){
   el.innerHTML = data.map((c, i) => `
     <div class="conf-row">
       <span class="conf-num">${i + 1}</span>
-      <p class="conf-text"><strong>${c.year}</strong> — ${c.text}</p>
+      <p class="conf-text"><strong>${c.year}</strong> — ${pick(c, 'text')}</p>
     </div>
   `).join('');
 }
@@ -65,9 +102,9 @@ function renderExpertise(containerId, data){
   if(!el) return;
   el.innerHTML = data.map(group => `
     <div class="exp-card">
-      <p class="exp-card-label">${group.label}</p>
+      <p class="exp-card-label">${pick(group, 'label')}</p>
       <div class="skill-tags tags">
-        ${group.skills.map(s => `<span class="tag tag-${s.type}">${s.name}</span>`).join('')}
+        ${group.skills.map(s => `<span class="tag tag-${s.type}">${pick(s, 'name')}</span>`).join('')}
       </div>
     </div>
   `).join('');
@@ -105,12 +142,12 @@ function tutorialCardHTML(t){
   return `
     <a class="tut-card" href="${t.url}">
       <div class="tut-cover">
-        ${t.cover ? `<img src="${t.cover}" alt="${t.title}">` : (t.type === 'podcast' ? '🎙️' : '📝')}
+        ${t.cover ? `<img src="${t.cover}" alt="${pickEn(t, 'title')}">` : (t.type === 'podcast' ? '🎙️' : '📝')}
       </div>
       <div class="tut-body">
         <p class="tut-date">${t.date}</p>
-        <p class="tut-title">${t.title}</p>
-        <p class="tut-summary">${t.summary}</p>
+        <p class="tut-title">${pickEn(t, 'title')}</p>
+        <p class="tut-summary">${pickEn(t, 'summary')}</p>
         <div class="tags tut-tags">
           ${t.tags.map(x => `<span class="tag tag-g">${x}</span>`).join('')}
         </div>
@@ -193,14 +230,13 @@ function getGalleryCounts(data){
   return counts;
 }
 
-/* Source 徽章的展示映射表：图标 + 文案
-   新增 source 类型时，只需要在这里加一行，
-   renderGallery() 和 openLightbox() 都不需要再改 */
-const GALLERY_SOURCE_BADGE_MAP = {
-  local:   { label: '💾 Local' },
-  drive:   { label: '☁️ Drive' },
-  youtube: { label: '▶️ YouTube' }
-};
+/* Source 徽章文案：统一从 i18n.js 的 gal.badge.<source> 读取（中英文双语）。
+   新增 source 时只需在 i18n.js 加对应键，这里无需改动。 */
+function galleryBadgeText(source){
+  var k = 'gal.badge.' + source;
+  var v = (typeof t === 'function') ? t(k) : k;
+  return (v === k) ? source : v;
+}
 
 /* 判断某个视频 item 是否需要用 <iframe> 播放
    （凡是"embed 网页型"视频源都属于此类，与 source 类型解耦，
@@ -222,23 +258,20 @@ function renderGallery(containerId, data, filters = {type:'all', source:'all'}){
 
   if(list.length === 0){
     el.innerHTML = `<p style="grid-column:1/-1;text-align:center;color:var(--text-3);padding:2rem 0">
-      没有符合条件的内容 · No items match this filter
+      ${(typeof t === 'function') ? t('gallery.empty') : 'No items match this filter'}
     </p>`;
     window.__currentGalleryList = [];
     return;
   }
 
   el.innerHTML = list.map((g, i) => {
-    // 徽章查表，找不到则给一个兜底文案（避免未来漏配置时页面报错/空白）
-    const badge = GALLERY_SOURCE_BADGE_MAP[g.source] || { label: g.source };
-
     return `
     <div class="gal-item" onclick="openLightboxByIndex(${i})">
       ${g.type === 'video'
-        ? `<img src="${g.thumb}" alt="${g.caption || ''}"><div class="gal-play">▶</div>`
-        : `<img src="${g.src}" alt="${g.caption || ''}">`}
-      <span class="gal-source-badge">${badge.label}</span>
-      <div class="gal-caption">${g.caption || ''}</div>
+        ? `<img src="${g.thumb}" alt="${pick(g, 'caption') || ''}"><div class="gal-play">▶</div>`
+        : `<img src="${g.src}" alt="${pick(g, 'caption') || ''}">`}
+      <span class="gal-source-badge">${galleryBadgeText(g.source)}</span>
+      <div class="gal-caption">${pick(g, 'caption') || ''}</div>
     </div>
   `;
   }).join('');
@@ -264,7 +297,7 @@ function openLightbox(item){
   } else if(item.type === 'video'){
     body.innerHTML = `<video src="${item.src}" controls autoplay></video>`;
   } else {
-    body.innerHTML = `<img src="${item.src}" alt="${item.caption || ''}">`;
+    body.innerHTML = `<img src="${item.src}" alt="${pick(item, 'caption') || ''}">`;
   }
   lb.classList.add('open');
 }
@@ -322,6 +355,17 @@ const NEWS_BADGE_MAP = {
   tool:        { label: "Tool / Release", cls: "news-badge-tool" }
 };
 
+/* News 徽章 / 分类标签 / 链接文案：统一从 i18n.js 读取（中英文双语），
+   未知分类回退到原始 category key。tabs 与 badge 共用同一套键 news.cat.* */
+function newsBadgeLabel(cat){
+  var k = 'news.cat.' + cat;
+  var v = (typeof t === 'function') ? t(k) : k;
+  return (v === k) ? cat : v;
+}
+function newsReadMoreText(){
+  return (typeof t === 'function') ? t('news.readmore') : 'Read more →';
+}
+
 // ============================================================
 // Render News Timeline (auto-sorted by sortDate, grouped by
 // year derived from sortDate — reverse chronological)
@@ -331,7 +375,7 @@ function renderNews(containerId, data) {
   if (!container) return;
 
   if (!data || data.length === 0) {
-    container.innerHTML = `<p class="news-empty">No news items in this category yet.</p>`;
+    container.innerHTML = `<p class="news-empty">${(typeof t === 'function') ? t('news.empty') : 'No news items in this category yet.'}</p>`;
     return;
   }
 
@@ -342,15 +386,15 @@ function renderNews(containerId, data) {
   years.forEach(year => {
     html += `<div class="news-year-label">${year}</div>`;
     sorted.filter(item => getYearFromItem(item) === year).forEach(item => {
-      const badge = NEWS_BADGE_MAP[item.category] || { label: item.category, cls: "news-badge-team" };
+      const badge = NEWS_BADGE_MAP[item.category] || { cls: "news-badge-team" };
       html += `
         <div class="news-item">
-          <div class="news-date">${item.date}</div>
+          <div class="news-date">${pick(item, 'date')}</div>
           <div class="news-content">
-            <span class="news-badge ${badge.cls}">${badge.label}</span>
-            <p class="news-title">${item.title}</p>
-            <p class="news-summary">${item.summary}</p>
-            ${item.link ? `<a class="news-link" href="${item.link}" target="${item.link.startsWith('http') ? '_blank' : '_self'}" rel="noopener">${item.linkText || 'Read more →'}</a>` : ''}
+            <span class="news-badge ${badge.cls}">${newsBadgeLabel(item.category)}</span>
+            <p class="news-title">${pick(item, 'title')}</p>
+            <p class="news-summary">${pick(item, 'summary')}</p>
+            ${item.link ? `<a class="news-link" href="${item.link}" target="${item.link.startsWith('http') ? '_blank' : '_self'}" rel="noopener">${pick(item, 'linkText') || newsReadMoreText()}</a>` : ''}
           </div>
         </div>`;
     });
@@ -367,16 +411,6 @@ function renderNewsTabs(tabsContainerId, timelineContainerId, data) {
   if (!tabsContainer) return;
 
   const categoryOrder = ["all", "publication", "grant", "award", "talk", "media", "team", "tool"];
-  const categoryLabels = {
-    all: "All",
-    publication: "Publication",
-    grant: "Grant",
-    award: "Award",
-    talk: "Talk",
-    media: "Media",
-    team: "Team",
-    tool: "Tool / Release"
-  };
 
   const counts = { all: data.length };
   categoryOrder.slice(1).forEach(cat => {
@@ -388,7 +422,7 @@ function renderNewsTabs(tabsContainerId, timelineContainerId, data) {
     const activeClass = cat === "all" ? " active" : "";
     html += `
       <button class="news-tab${activeClass}" data-category="${cat}">
-        ${categoryLabels[cat]}
+        ${newsBadgeLabel(cat)}
         <span class="news-tab-count">${counts[cat]}</span>
       </button>`;
   });
@@ -414,7 +448,7 @@ function renderNewsHighlights(containerId, data, count = 3) {
   if (!el) return;
 
   if (!data || data.length === 0) {
-    el.innerHTML = `<p class="news-empty">No news items yet.</p>`;
+    el.innerHTML = `<p class="news-empty">${(typeof t === 'function') ? t('news.empty') : 'No news items yet.'}</p>`;
     return;
   }
 
@@ -425,12 +459,12 @@ function renderNewsHighlights(containerId, data, count = 3) {
     const badge = NEWS_BADGE_MAP[item.category] || { label: item.category, cls: "news-badge-team" };
     return `
       <div class="highlight-item">
-        <div class="highlight-date">${item.date}</div>
+        <div class="highlight-date">${pick(item, 'date')}</div>
         <div class="highlight-content">
-          <span class="news-badge ${badge.cls}">${badge.label}</span>
-          <p class="highlight-title">${item.title}</p>
-          <p class="highlight-summary">${item.summary}</p>
-          ${item.link ? `<a class="news-link" href="${item.link}" target="${item.link.startsWith('http') ? '_blank' : '_self'}" rel="noopener">${item.linkText || 'Read more →'}</a>` : ''}
+          <span class="news-badge ${badge.cls}">${newsBadgeLabel(item.category)}</span>
+          <p class="highlight-title">${pick(item, 'title')}</p>
+          <p class="highlight-summary">${pick(item, 'summary')}</p>
+          ${item.link ? `<a class="news-link" href="${item.link}" target="${item.link.startsWith('http') ? '_blank' : '_self'}" rel="noopener">${pick(item, 'linkText') || newsReadMoreText()}</a>` : ''}
         </div>
       </div>`;
   }).join('');

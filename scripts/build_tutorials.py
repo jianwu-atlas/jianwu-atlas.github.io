@@ -104,6 +104,10 @@ def parse_front_matter(raw_text: str, filename: str) -> tuple[dict, str]:
     meta.setdefault("type", DEFAULT_TYPE)
     meta.setdefault("cover", "")
     meta.setdefault("draft", False)
+    # 可选英文覆盖字段（教程以中文为主）：存在即写入 tutorials.js 的 title_en/summary_en，
+    # 由 render.js 的 pickEn() 在英文模式下优先取用；缺失则回退中文 title/summary 正文。
+    meta.setdefault("title_en", "")
+    meta.setdefault("summary_en", "")
 
     return meta, body.strip()
 
@@ -148,8 +152,10 @@ def render_tutorial_page(meta: dict, html_body: str) -> str:
 
     replacements = {
         "{{TITLE}}":        meta["title"],
+        "{{TITLE_EN}}":     meta.get("title_en", ""),
         "{{DATE}}":         meta["date"],
         "{{SUMMARY}}":      meta["summary"],
+        "{{SUMMARY_EN}}":   meta.get("summary_en", ""),
         "{{TYPE}}":         meta["type"],
         "{{TAGS_HTML}}":    tags_html,
         "{{CONTENT}}":      html_body,
@@ -241,6 +247,13 @@ def format_js_entry(meta: dict) -> str:
     """
     tags_js = json.dumps(meta["tags"], ensure_ascii=False)
 
+    # 可选英文覆盖字段：有值才输出，保持中文源文件简洁（无 _en 即回退中文）
+    extra_lines = ""
+    if meta.get("title_en"):
+        extra_lines += f'    title_en: {json.dumps(meta["title_en"], ensure_ascii=False)},\n'
+    if meta.get("summary_en"):
+        extra_lines += f'    summary_en: {json.dumps(meta["summary_en"], ensure_ascii=False)},\n'
+
     return (
         "  {\n"
         f'    date: {json.dumps(meta["date"])},\n'
@@ -249,6 +262,7 @@ def format_js_entry(meta: dict) -> str:
         f'    url: {json.dumps(meta["url"])},\n'
         f'    cover: {json.dumps(meta.get("cover", ""))},\n'
         f'    type: {json.dumps(meta["type"])},\n'
+        f"{extra_lines}"
         f"    tags: {tags_js}\n"
         "  }"
     )
