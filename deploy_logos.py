@@ -39,13 +39,13 @@ print(f"✅ Backup created at: {BACKUP_DIR}\n")
 # ------------------------------------------------------------------
 
 FAVICON_BLOCK = (
-    '<link rel="icon" type="image/png" href="assets/img/logos/Jian_Wu_icon-only.png">\n'
-    '<link rel="apple-touch-icon" href="assets/img/logos/Jian_Wu_icon-only.png">'
+    '<link rel="icon" type="image/png" href="assets/img/logos/wu_jian_icon.png">\n'
+    '<link rel="apple-touch-icon" href="assets/img/logos/wu_jian_icon.png">'
 )
 
 NAV_BRAND_NEW = (
     '<a href="index.html" class="nav-brand">\n'
-    '      <img src="assets/img/logos/Jian_Wu_icon-only.png" alt="Jian Wu" class="brand-icon-img">\n'
+    '      <img src="assets/img/logos/wu_jian_icon.png" alt="Jian Wu" class="brand-icon-img">\n'
     '      Jian Wu\n'
     '    </a>'
 )
@@ -53,7 +53,7 @@ NAV_BRAND_NEW = (
 HERO_LOGO_SECTION = '''
 <!-- ============ Hero Logo Section (index.html only) ============ -->
 <section class="hero-logo-section">
-  <img src="assets/img/logos/Jian_Wu_logo.png"
+  <img src="assets/img/logos/wu_jian_lockup.png"
        alt="Jian Wu - Lung Cell Atlas Research | Computational Biology & Multi-omics"
        class="hero-logo-img">
 </section>
@@ -66,7 +66,7 @@ FOOTER_NEW = '''<footer class="site-footer">
     <div class="footer-logos-row">
 
       <a href="index.html" class="footer-logo-item footer-logo-self" title="Jian Wu">
-        <img src="assets/img/logos/Jian_Wu_icon-only.png" alt="Jian Wu - Lung Cell Atlas Research">
+        <img src="assets/img/logos/wu_jian_icon.png" alt="Jian Wu - Lung Cell Atlas Research">
       </a>
 
       <div class="footer-logo-divider"></div>

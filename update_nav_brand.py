@@ -21,7 +21,7 @@ TARGET_FILES = [
 # ── 匹配旧的 nav-brand 结构（允许任意空白/换行差异） ──
 OLD_PATTERN = re.compile(
     r'<a href="index\.html" class="nav-brand">\s*'
-    r'<img src="assets/img/logos/Jian_Wu_icon-only\.png" alt="Jian Wu" class="brand-icon-img">\s*'
+    r'<img src="assets/img/logos/wu_jian_icon\.png" alt="Jian Wu" class="brand-icon-img">\s*'
     r'Jian Wu\s*'
     r'</a>',
     re.MULTILINE,
@@ -30,7 +30,7 @@ OLD_PATTERN = re.compile(
 # ── 替换为紧凑双行版本 ──
 NEW_BLOCK = (
     '<a href="index.html" class="nav-brand">\n'
-    '      <img src="assets/img/logos/Jian_Wu_icon-only.png" alt="Jian Wu" class="brand-icon-img">\n'
+    '      <img src="assets/img/logos/wu_jian_icon.png" alt="Jian Wu" class="brand-icon-img">\n'
     '      <span class="nav-brand-text">\n'
     '        <span class="nav-brand-title">JIAN WU</span>\n'
     '        <span class="nav-brand-sub">Lung Cell Atlas Research</span>\n'

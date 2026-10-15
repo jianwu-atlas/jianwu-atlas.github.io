@@ -4,7 +4,7 @@ date: 2026-07-16
 summary: "从 Claude 记忆导出的用户背景摘要，用于迁移到 Gemini 等其他 AI 助理，涵盖研究方向、工作偏好与指令设定。"
 type: tutorial
 tags: ['Jian Wu',"AI", "记忆管理", "工具"]
-cover: "https://jianwu-atlas.github.io/assets/img/logos/Jian_Wu_logo.png"
+cover: "https://jianwu-atlas.github.io/assets/img/logos/wu_jian_lockup.png"
 ---
 
 帮我把一个 AI 助理中的上下文导入到另一个 AI 助理。你的任务是回顾我们过往的对话，总结你对我的了解。
