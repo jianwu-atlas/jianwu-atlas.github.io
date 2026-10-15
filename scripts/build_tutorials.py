@@ -45,7 +45,7 @@ REPO_ROOT = Path(__file__).resolve().parent.parent  # scripts/ 的上一级 = �
 TUTORIALS_SRC_DIR   = REPO_ROOT / "tutorials-src"                 # Markdown 源文件目录
 TUTORIALS_OUT_DIR   = REPO_ROOT / "tutorials"                      # 生成的静态 HTML 输出目录
 TUTORIALS_JS_PATH   = REPO_ROOT / "assets" / "js" / "data" / "tutorials.js"
-TUTORIAL_TEMPLATE   = REPO_ROOT / "assets" / "templates" / "tutorial_template.html"
+TUTORIAL_TEMPLATE   = REPO_ROOT / "tutorials" / "tutorial_template.html"
 
 REQUIRED_FIELDS = ["title", "date", "summary", "type"]  # front matter 必填字段
 DEFAULT_TYPE    = "tutorial"                             # tutorial / podcast
