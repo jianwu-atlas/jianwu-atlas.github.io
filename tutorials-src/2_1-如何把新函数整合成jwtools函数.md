@@ -4,7 +4,7 @@ date: 2026-07-17
 summary: "记录如何将新写的 R 函数按 roxygen2 + testthat 规范整合进 jwtools 包，含依赖声明、文档生成与测试流程。"
 type: tutorial
 tags: ['Jian Wu',"R", "Seurat", "jwtools"]
-cover: "https://jianwu-atlas.github.io/assets/img/logos/jwtools_logo_social_preview.png"
+cover: "https://jianwu-atlas.github.io/assets/img/logos/wu_jian_lockup.png"
 ---
 
 ## 整合成 jwtools 函数

@@ -5,7 +5,7 @@ summary: "DRAGEN Single Cell RNA 分析踩坑记录：BaseSpace 表单必填项�
 type: tutorial
 tags: ["Jian Wu", "jwtools", "PH project", "DRAGEN", "Illumina"]
 cover: "https://jianwu-atlas.github.io/assets/img/logos/wu_jian_lockup.png"
-#cover: "https://jianwu-atlas.github.io/assets/img/logos/jwtools_logo_social_preview.png"
+#cover: "https://jianwu-atlas.github.io/assets/img/logos/wu_jian_lockup.png"
 #cover: "https://github.com/jianwu-atlas/jwtools/raw/main/man/figures/logo.png"
 ---
 

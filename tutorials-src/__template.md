@@ -5,7 +5,7 @@ summary: "这里写一句话摘要，会显示在列表卡片和搜索引擎摘�
 type: tutorial
 tags: ["Jian Wu", "jwtools", "R", "Seurat", "标签3"]
 cover: "https://jianwu-atlas.github.io/assets/img/logos/wu_jian_lockup.png"
-#cover: "https://jianwu-atlas.github.io/assets/img/logos/jwtools_logo_social_preview.png"
+#cover: "https://jianwu-atlas.github.io/assets/img/logos/wu_jian_lockup.png"
 #cover: "https://github.com/jianwu-atlas/jwtools/raw/main/man/figures/logo.png"
 ---
 

@@ -16,7 +16,7 @@ const tutorialsData = [
     title: "如何把新函数整合成jwtools函数",
     summary: "记录如何将新写的 R 函数按 roxygen2 + testthat 规范整合进 jwtools 包，含依赖声明、文档生成与测试流程。",
     url: "tutorials/2_1-\u5982\u4f55\u628a\u65b0\u51fd\u6570\u6574\u5408\u6210jwtools\u51fd\u6570.html",
-    cover: "https://jianwu-atlas.github.io/assets/img/logos/jwtools_logo_social_preview.png",
+    cover: "https://jianwu-atlas.github.io/assets/img/logos/wu_jian_lockup.png",
     type: "tutorial",
     tags: ["Jian Wu", "R", "Seurat", "jwtools"]
   },
@@ -25,7 +25,7 @@ const tutorialsData = [
     title: "如何查看jwtools包里有哪些可用函数",
     summary: "介绍 6 种在 R 中查找已安装包导出函数的方法，从 ls() 到 NAMESPACE 源码核查，并以自建包 jwtools 为例演示。",
     url: "tutorials/1_\u67e5\u770bjwtools\u6709\u54ea\u4e9b\u51fd\u6570.html",
-    cover: "https://jianwu-atlas.github.io/assets/img/logos/jwtools_logo_social_preview.png",
+    cover: "https://jianwu-atlas.github.io/assets/img/logos/wu_jian_lockup.png",
     type: "tutorial",
     tags: ["Jian Wu", "R", "jwtools", "R包开发"]
   }
