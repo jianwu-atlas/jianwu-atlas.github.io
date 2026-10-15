@@ -61,8 +61,8 @@ query MonthlyWebAnalytics($accountTag: String!, $siteTag: String!, $since: Time!
 """
 
 
-def fetch_daily_data(api_token: str, account_id: str, site_tag: str,
-                      since: datetime, until: datetime) -> pd.DataFrame:
+def fetch_daily_data_chunk(api_token: str, account_id: str, site_tag: str,
+                           since: datetime, until: datetime) -> pd.DataFrame:
     headers = {
         "Authorization": f"Bearer {api_token}",
         "Content-Type": "application/json",
@@ -97,6 +97,25 @@ def fetch_daily_data(api_token: str, account_id: str, site_tag: str,
     if not df.empty:
         df["date"] = pd.to_datetime(df["date"])
     return df
+
+
+def fetch_daily_data(api_token: str, account_id: str, site_tag: str,
+                     since: datetime, until: datetime, chunk_days: int = 90) -> pd.DataFrame:
+    chunks = []
+    chunk_start = since
+    while chunk_start < until:
+        chunk_end = min(chunk_start + timedelta(days=chunk_days), until)
+        chunk_df = fetch_daily_data_chunk(api_token, account_id, site_tag, chunk_start, chunk_end)
+        if not chunk_df.empty:
+            chunks.append(chunk_df)
+        chunk_start = chunk_end
+
+    if not chunks:
+        return pd.DataFrame(columns=["date", "page_views", "visits"])
+
+    daily = pd.concat(chunks, ignore_index=True)
+    daily = daily.drop_duplicates(subset=["date"]).sort_values("date").reset_index(drop=True)
+    return daily
 
 
 def aggregate_monthly(df: pd.DataFrame) -> pd.DataFrame:
