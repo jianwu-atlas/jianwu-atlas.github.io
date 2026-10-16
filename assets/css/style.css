@@ -365,13 +365,13 @@ footer a:hover{color:var(--copper)}
     justify-content: center;
     align-items: center;
     margin-top: var(--nav-h);
-    padding: 8px 20px 16px;
+    padding: 8px 20px 10px;
     transition: background-color .2s;
 }
 .hero-logo-inner{
     display:grid;
     grid-template-columns:auto minmax(0,1fr);
-    gap:1rem 3.5rem;
+    gap:1rem 3rem;
     align-items:center;
     width:100%;
     max-width:var(--wrap-w);
@@ -379,7 +379,7 @@ footer a:hover{color:var(--copper)}
 }
 .hero-text{
     display:flex;flex-direction:column;align-items:flex-start;
-    gap:1.1rem;max-width:560px
+    gap:1.1rem
 }
 .hero-tagline{
     font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:400;
@@ -466,7 +466,7 @@ body.dark .hero-cta-outline:hover{
 
 /* ---- page-wrap modifier: index.html only ---- */
 .page-wrap--home {
-    padding-top: 0.5rem;
+    padding-top: 0.25rem;
 }
 
 /* ---- Reading-width protection: wide containers keep comfortable line length ---- */
