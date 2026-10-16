@@ -144,7 +144,16 @@ var I18N = {
     "ph.name":          "Your name",
     "ph.email":         "Your email",
     "ph.message":       "Message",
-    "btn.send":         "Send Message"
+    "btn.send":         "Send Message",
+
+    /* ── 404 page ── */
+    "title.404":        "Page not found | Jian Wu",
+    "404.code":         "404",
+    "404.header":       "This page could not be found",
+    "404.body":         "The link may be broken, or the page may have been moved or renamed.",
+    "404.home":         "Back to homepage",
+    "404.tutorials":    "Browse tutorials",
+    "404.publications": "View publications"
   },
 
   zh: {
@@ -278,7 +287,16 @@ var I18N = {
     "ph.name":          "您的姓名",
     "ph.email":         "您的邮箱",
     "ph.message":       "留言内容",
-    "btn.send":         "发送留言"
+    "btn.send":         "发送留言",
+
+    /* ── 404 页面 ── */
+    "title.404":        "页面未找到 | 吴坚",
+    "404.code":         "404",
+    "404.header":       "页面未找到",
+    "404.body":         "链接可能已失效，或者该页面已被移动 / 改名。",
+    "404.home":         "返回首页",
+    "404.tutorials":    "浏览教程",
+    "404.publications": "查看论文"
   }
 };
 

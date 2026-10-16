@@ -55,4 +55,22 @@
     <priority>0.4</priority>
   </url>
 
+  <url>
+    <loc>https://jianwu-atlas.github.io/tutorials/1_查看jwtools有哪些函数.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://jianwu-atlas.github.io/tutorials/2_1-如何把新函数整合成jwtools函数.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://jianwu-atlas.github.io/tutorials/2_2-Illumina BaseSpace.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
 </urlset>

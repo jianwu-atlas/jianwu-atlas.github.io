@@ -37,6 +37,8 @@
       <a href="news.html" data-i18n="nav.news">News</a>
       <a href="gallery.html" data-i18n="nav.gallery">Gallery</a>
       <a href="contact.html" data-i18n="nav.contact">Contact</a>
+      <a href="https://jianwu-atlas.github.io/deutschheft/" target="_blank" rel="noopener">Deutschheft</a>
+      <a href="https://jianwu-atlas.github.io/englishheft/" target="_blank" rel="noopener">Englishheft</a>
     </div>
     <div class="nav-tools">
       <button class="lang-btn" onclick="toggleLang()" data-i18n="lang.switch" data-i18n-title="lang.switch.title" title="Switch to Chinese">中文</button>
@@ -50,6 +52,22 @@
   <div class="page-header">
     <h1 data-i18n="gallery.header">Gallery</h1>
     <p data-i18n="gallery.sub">Photos &amp; videos — life, fieldwork, and conferences</p>
+  </div>
+
+  <div class="gal-tabs-row">
+    <span class="gal-tab-label">Category</span>
+    <div class="gal-tab active" data-filter-key="category" data-filter-val="all" onclick="setCategoryFilter('all', this)">
+      All <span class="gal-tab-count" id="count-category-all"></span>
+    </div>
+    <div class="gal-tab" data-filter-key="category" data-filter-val="Research" onclick="setCategoryFilter('Research', this)">
+      🔬 Research <span class="gal-tab-count" id="count-category-research"></span>
+    </div>
+    <div class="gal-tab" data-filter-key="category" data-filter-val="Life" onclick="setCategoryFilter('Life', this)">
+      🌿 Life <span class="gal-tab-count" id="count-category-life"></span>
+    </div>
+    <div class="gal-tab" data-filter-key="category" data-filter-val="Films" onclick="setCategoryFilter('Films', this)">
+      🎞️ Films <span class="gal-tab-count" id="count-category-films"></span>
+    </div>
   </div>
 
   <div class="gal-tabs-row">
@@ -79,6 +97,9 @@
     <div class="gal-tab" data-filter-key="source" data-filter-val="youtube" onclick="setSourceFilter('youtube', this)">
       <span data-i18n="gal.youtube">▶️ YouTube</span> <span class="gal-tab-count" id="count-source-youtube"></span>
     </div>
+    <div class="gal-tab" data-filter-key="source" data-filter-val="bilibili" onclick="setSourceFilter('bilibili', this)">
+      📺 Bilibili <span class="gal-tab-count" id="count-source-bilibili"></span>
+    </div>
   </div>
 
   <div class="gal-grid" id="galGrid"></div>
@@ -96,37 +117,37 @@
     <div class="footer-logos-row">
 
       <a href="index.html" class="footer-logo-item footer-logo-self" title="Jian Wu">
-        <img src="assets/img/logos/wu_jian_icon.png" alt="Jian Wu - Lung Cell Atlas Research">
+        <img src="assets/img/logos/wu_jian_icon.png" alt="Jian Wu - Lung Cell Atlas Research" loading="lazy" decoding="async">
       </a>
 
       <div class="footer-logo-divider"></div>
 
       <a href="https://www.uni-giessen.de/en" target="_blank" rel="noopener" class="footer-logo-item" title="Justus-Liebig-Universität Gießen">
-        <img src="assets/img/logos/jlu-giessen.png" alt="Justus-Liebig-Universität Gießen">
+        <img src="assets/img/logos/jlu-giessen.png" alt="Justus-Liebig-Universität Gießen" loading="lazy" decoding="async">
       </a>
 
       <a href="https://www.mpi-hlr.de/en" target="_blank" rel="noopener" class="footer-logo-item" title="Max Planck Institute for Heart and Lung Research">
-        <img src="assets/img/logos/mpi-kerckhoff.png" alt="Max Planck Institute for Heart and Lung Research">
+        <img src="assets/img/logos/mpi-kerckhoff.png" alt="Max Planck Institute for Heart and Lung Research" loading="lazy" decoding="async">
       </a>
 
       <a href="https://cpi-online.de/" target="_blank" rel="noopener" class="footer-logo-item" title="Cardio-Pulmonary Institute">
-        <img src="assets/img/logos/cpi.png" alt="Cardio-Pulmonary Institute (CPI)">
+        <img src="assets/img/logos/cpi.png" alt="Cardio-Pulmonary Institute (CPI)" loading="lazy" decoding="async">
       </a>
 
       <a href="https://dzl.de/en/" target="_blank" rel="noopener" class="footer-logo-item" title="DZL DataLung School">
-        <img src="assets/img/logos/dzl-datalung.png" alt="Deutsches Zentrum für Lungenforschung - DataLung School">
+        <img src="assets/img/logos/dzl-datalung.png" alt="Deutsches Zentrum für Lungenforschung - DataLung School" loading="lazy" decoding="async">
       </a>
 
       <a href="https://www.imprs-mob.de/" target="_blank" rel="noopener" class="footer-logo-item" title="IMPRS for Molecular Organ Biology">
-        <img src="assets/img/logos/imprs-mob.png" alt="IMPRS for Molecular Organ Biology">
+        <img src="assets/img/logos/imprs-mob.png" alt="IMPRS for Molecular Organ Biology" loading="lazy" decoding="async">
       </a>
 
       <a href="https://ilh-giessen.de/en/" target="_blank" rel="noopener" class="footer-logo-item" title="Institute for Lung Health">
-        <img src="assets/img/logos/ilh.png" alt="Institute for Lung Health (ILH)">
+        <img src="assets/img/logos/ilh.png" alt="Institute for Lung Health (ILH)" loading="lazy" decoding="async">
       </a>
 
       <a href="https://www.spullamsettilab.com/index.php" target="_blank" rel="noopener" class="footer-logo-item" title="Pullamsetti Lab">
-        <img src="assets/img/logos/pullamsetti-lab.png" alt="Pullamsetti Lab - Lung Vascular Epigenetics">
+        <img src="assets/img/logos/pullamsetti-lab.png" alt="Pullamsetti Lab - Lung Vascular Epigenetics" loading="lazy" decoding="async">
       </a>
 
     </div>
@@ -145,21 +166,33 @@
 <script src="assets/js/i18n.js"></script>
 <script src="assets/js/main.js"></script>
 <script>
-  const currentFilters = { type: 'all', source: 'all' };
+  const currentFilters = { type: 'all', category: 'all', source: 'all' };
 
   (function initCounts(){
     const counts = getGalleryCounts(galleryData);
     document.getElementById('count-type-all').textContent   = counts.all;
     document.getElementById('count-type-photo').textContent = counts.photo;
     document.getElementById('count-type-video').textContent = counts.video;
+    document.getElementById('count-category-all').textContent      = counts.category.all;
+    document.getElementById('count-category-research').textContent = counts.category.Research || 0;
+    document.getElementById('count-category-life').textContent     = counts.category.Life || 0;
+    document.getElementById('count-category-films').textContent    = counts.category.Films || 0;
     document.getElementById('count-source-all').textContent     = counts.all;
     document.getElementById('count-source-local').textContent   = counts.local   || 0;
     document.getElementById('count-source-drive').textContent   = counts.drive   || 0;
     document.getElementById('count-source-youtube').textContent = counts.youtube || 0;
+    document.getElementById('count-source-bilibili').textContent = counts.bilibili || 0;
   })();
 
   window.__langCallbacks = window.__langCallbacks || [];
   window.__langCallbacks.push(() => { renderGallery('galGrid', galleryData, currentFilters); });
+
+  function setCategoryFilter(category, btn){
+    currentFilters.category = category;
+    document.querySelectorAll('.gal-tab[data-filter-key="category"]').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    renderGallery('galGrid', galleryData, currentFilters);
+  }
 
   function setTypeFilter(type, btn){
     currentFilters.type = type;

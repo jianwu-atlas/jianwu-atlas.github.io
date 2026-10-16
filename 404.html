@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-i18n="title.404">Page not found | Jian Wu</title>
+<meta name="description" content="Page not found.">
+<meta name="robots" content="noindex, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="assets/img/logos/wu_jian_icon.png">
+<link rel="apple-touch-icon" href="assets/img/logos/wu_jian_icon.png">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <img src="assets/img/logos/wu_jian_icon.png" alt="Jian Wu" class="brand-icon-img">
+      <span class="nav-brand-text">
+        <span class="nav-brand-title">JIAN WU</span>
+        <span class="nav-brand-sub" data-i18n="brand.sub">Lung Cell Atlas Research</span>
+      </span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html" data-i18n="nav.home">Home</a>
+      <div class="nav-drop">
+        <button data-i18n="nav.research">Research ▾</button>
+        <div class="nav-drop-menu">
+          <a href="experience.html" data-i18n="nav.experience">Experience</a>
+          <a href="publications.html" data-i18n="nav.publications">Publications</a>
+          <a href="conferences.html" data-i18n="nav.conferences">Conferences</a>
+        </div>
+      </div>
+      <a href="expertise.html" data-i18n="nav.expertise">Expertise</a>
+      <a href="tutorials.html" data-i18n="nav.tutorials">Tutorials</a>
+      <a href="news.html" data-i18n="nav.news">News</a>
+      <a href="gallery.html" data-i18n="nav.gallery">Gallery</a>
+      <a href="contact.html" data-i18n="nav.contact">Contact</a>
+      <a href="https://jianwu-atlas.github.io/deutschheft/" target="_blank" rel="noopener">Deutschheft</a>
+      <a href="https://jianwu-atlas.github.io/englishheft/" target="_blank" rel="noopener">Englishheft</a>
+    </div>
+    <div class="nav-tools">
+      <button class="lang-btn" onclick="toggleLang()" data-i18n="lang.switch" data-i18n-title="lang.switch.title" title="Switch to Chinese">中文</button>
+      <button onclick="toggleDark()" title="Dark mode">🌙</button>
+      <button class="nav-burger" onclick="toggleMobileNav()">☰</button>
+    </div>
+  </div>
+</nav>
+
+<div class="full-wrap">
+  <div class="page-header">
+    <div class="notfound-code" data-i18n="404.code">404</div>
+    <h1 data-i18n="404.header">This page could not be found</h1>
+    <p data-i18n="404.body">The link may be broken, or the page may have been moved or renamed.</p>
+    <div class="notfound-actions">
+      <a href="index.html" class="notfound-btn notfound-btn--primary" data-i18n="404.home">Back to homepage</a>
+      <a href="tutorials.html" class="notfound-btn" data-i18n="404.tutorials">Browse tutorials</a>
+      <a href="publications.html" class="notfound-btn" data-i18n="404.publications">View publications</a>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer">
+
+  <div class="footer-logos-wrap">
+    <p class="footer-logos-label" data-i18n="footer.affil">Affiliated Institutions &amp; Collaborators</p>
+    <div class="footer-logos-row">
+
+      <a href="index.html" class="footer-logo-item footer-logo-self" title="Jian Wu">
+        <img src="assets/img/logos/wu_jian_icon.png" alt="Jian Wu - Lung Cell Atlas Research" loading="lazy" decoding="async">
+      </a>
+
+      <div class="footer-logo-divider"></div>
+
+      <a href="https://www.uni-giessen.de/en" target="_blank" rel="noopener" class="footer-logo-item" title="Justus-Liebig-Universität Gießen">
+        <img src="assets/img/logos/jlu-giessen.png" alt="Justus-Liebig-Universität Gießen" loading="lazy" decoding="async">
+      </a>
+
+      <a href="https://www.mpi-hlr.de/en" target="_blank" rel="noopener" class="footer-logo-item" title="Max Planck Institute for Heart and Lung Research">
+        <img src="assets/img/logos/mpi-kerckhoff.png" alt="Max Planck Institute for Heart and Lung Research" loading="lazy" decoding="async">
+      </a>
+
+      <a href="https://cpi-online.de/" target="_blank" rel="noopener" class="footer-logo-item" title="Cardio-Pulmonary Institute">
+        <img src="assets/img/logos/cpi.png" alt="Cardio-Pulmonary Institute (CPI)" loading="lazy" decoding="async">
+      </a>
+
+      <a href="https://dzl.de/en/" target="_blank" rel="noopener" class="footer-logo-item" title="DZL DataLung School">
+        <img src="assets/img/logos/dzl-datalung.png" alt="Deutsches Zentrum für Lungenforschung - DataLung School" loading="lazy" decoding="async">
+      </a>
+
+      <a href="https://www.imprs-mob.de/" target="_blank" rel="noopener" class="footer-logo-item" title="IMPRS for Molecular Organ Biology">
+        <img src="assets/img/logos/imprs-mob.png" alt="IMPRS for Molecular Organ Biology" loading="lazy" decoding="async">
+      </a>
+
+      <a href="https://ilh-giessen.de/en" target="_blank" rel="noopener" class="footer-logo-item" title="Institute for Lung Health">
+        <img src="assets/img/logos/ilh.png" alt="Institute for Lung Health (ILH)" loading="lazy" decoding="async">
+      </a>
+
+      <a href="https://www.spullamsettilab.com/index.php" target="_blank" rel="noopener" class="footer-logo-item" title="Pullamsetti Lab">
+        <img src="assets/img/logos/pullamsetti-lab.png" alt="Pullamsetti Lab - Lung Vascular Epigenetics" loading="lazy" decoding="async">
+      </a>
+
+    </div>
+  </div>
+
+  <div class="footer-copyright">
+    © 2025 Jian Wu · CPI / MPI-BN / JLU Gießen / DZL / ILH ·
+    <a href="https://github.com/jianwu-atlas" target="_blank">GitHub</a> ·
+    <a href="https://orcid.org/0000-0003-4720-2374" target="_blank">ORCID</a>
+  </div>
+
+</footer>
+
+<script src="assets/js/i18n.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,12 +1,10 @@
 /* ============================================================
    render.js — 通用渲染引擎
    以后新增内容只需修改 assets/js/data/*.js，本文件无需改动
-------------------------------------------------------------
+   ------------------------------------------------------------
    i18n 约定（与 assets/js/i18n.js 配合）：
    - 数据对象里的 "xxx_zh" 字段是中文备选；
      pick(obj,'xxx') 在中文模式下优先取 xxx_zh，缺失则回退 xxx。
-   - 同理 pickEn(obj,'xxx')：英文模式下优先取 xxx_en（用于
-     tutorials 这类「中文为主、可选英文」的数据），否则回退原字段。
    - 换语言后由页面注册 window.__langCallbacks 回调重渲染，
      渲染函数天然支持重复调用（innerHTML 全量重绘）。
 ============================================================ */
@@ -58,8 +56,7 @@ function renderExperience(containerId, data){
           </div>
         </div>
       </div>
-    </div>
-  `;
+    </div>`;
   }).join('');
 }
 
@@ -139,15 +136,18 @@ function getYearFromDate(dateStr){
 /* 生成单个教程卡片的 HTML，抽成独立小函数，
    避免 groupByYear 分支和非分组分支各写一遍卡片模板导致重复维护 */
 function tutorialCardHTML(t){
+  // tutorials 以中文为主：英文模式优先取 title_en / summary_en，否则回退中文
+  const title = pickEn(t, 'title');
+  const summary = pickEn(t, 'summary');
   return `
     <a class="tut-card" href="${t.url}">
       <div class="tut-cover">
-        ${t.cover ? `<img src="${t.cover}" alt="${pickEn(t, 'title')}">` : (t.type === 'podcast' ? '🎙️' : '📝')}
+        ${t.cover ? `<img src="${t.cover}" alt="${title}" loading="lazy" decoding="async">` : (t.type === 'podcast' ? '🎙️' : '📝')}
       </div>
       <div class="tut-body">
         <p class="tut-date">${t.date}</p>
-        <p class="tut-title">${pickEn(t, 'title')}</p>
-        <p class="tut-summary">${pickEn(t, 'summary')}</p>
+        <p class="tut-title">${title}</p>
+        <p class="tut-summary">${summary}</p>
         <div class="tags tut-tags">
           ${t.tags.map(x => `<span class="tag tag-g">${x}</span>`).join('')}
         </div>
@@ -194,7 +194,7 @@ function renderTutorials(containerId, data, options = {}){
 }
 
 /* ============================================================
-   6. Gallery — 支持 type（photo/video）+ source（local/drive/youtube）
+   6. Gallery — 支持 type（photo/video）+ source（local/drive/youtube/bilibili）
       多重筛选，并提供数量统计辅助函数
    ------------------------------------------------------------
    修复说明（相对旧版）：
@@ -207,10 +207,26 @@ function renderTutorials(containerId, data, options = {}){
       的视频使用 <iframe>，其余视频一律走 <video src=...> 标签，
       导致 YouTube 这类"embed 网页型"视频源无法播放（<video>
       标签只能解析真实的媒体文件如 .mp4，不能解析网页 embed 链接）。
-      现在改为：只要是"iframe 类视频源"（drive / youtube 等），
+      现在改为：只要是"iframe 类视频源"（drive / youtube / bilibili 等），
       统一用 <iframe>；只有真正的本地媒体文件（source === 'local'
       且是 .mp4 等直链）才用 <video> 标签。
+   ④ 图片懒加载 + 缩略图约定：
+      - 所有由本文件渲染的 <img> 都带 loading="lazy" decoding="async"；
+        首屏图（导航 logo / hero / 头像）在静态 HTML 里单独排除，不使用此属性。
+      - 相册照片：thumb 字段指向缩略图（assets/img/gallery/thumbs/*.webp，
+        由 scripts/optimize_gallery.py 生成），src 仍保留原图路径。
+        渲染时用 g.thumb || g.src 回退，因此没有缩略图的新照片会自动
+        退回显示原图，不会出现裂图。
+      - openLightbox() 继续使用 item.src（原图），因为灯箱是用户主动
+        点击后打开的，理应给全分辨率。
 ============================================================ */
+
+/* 归一化来源：单来源条目用 source/src，多平台条目用 sources 数组
+   （同一部影片可同时有 youtube + bilibili，合并为一张卡） */
+function gallerySources(item){
+  if (Array.isArray(item.sources) && item.sources.length) return item.sources;
+  return [{ source: item.source, src: item.src }];
+}
 
 /* 统计各分类的数量，供 Tab 徽章显示
    —— 动态版本：自动适配 galleryData 里出现过的任意 source 值 */
@@ -221,30 +237,50 @@ function getGalleryCounts(data){
     video: data.filter(g => g.type === 'video').length
   };
 
-  // 动态扫描所有出现过的 source 值（local / drive / youtube / 未来任意新增）
-  const sourceKeys = [...new Set(data.map(g => g.source))];
-  sourceKeys.forEach(key => {
-    counts[key] = data.filter(g => g.source === key).length;
+  // 动态扫描所有出现过的 source（多平台条目按每个平台各计一次）
+  data.forEach(g => gallerySources(g).forEach(s => {
+    counts[s.source] = (counts[s.source] || 0) + 1;
+  }));
+
+  // 类别（category）统计：counts.category[<名称>]
+  counts.category = { all: data.length };
+  data.forEach(g => {
+    if (g.category) counts.category[g.category] = (counts.category[g.category] || 0) + 1;
   });
 
   return counts;
 }
 
-/* Source 徽章文案：统一从 i18n.js 的 gal.badge.<source> 读取（中英文双语）。
-   新增 source 时只需在 i18n.js 加对应键，这里无需改动。 */
-function galleryBadgeText(source){
-  var k = 'gal.badge.' + source;
-  var v = (typeof t === 'function') ? t(k) : k;
-  return (v === k) ? source : v;
+/* Source 徽章的展示映射表：中英文案
+   新增 source 类型时，只需要在这里加一行，
+   renderGallery() 和 openLightbox() 都不需要再改 */
+const GALLERY_SOURCE_BADGE_MAP = {
+  local:    { en: '💾 Local',    zh: '💾 本地' },
+  drive:    { en: '☁️ Drive',    zh: '☁️ 云盘' },
+  youtube:  { en: '▶️ YouTube',  zh: '▶️ YouTube' },
+  bilibili: { en: '📺 Bilibili', zh: '📺 B 站' }
+};
+
+/* 徽章文案：按当前语言取 en/zh（未配置语言时回退 en，再回退 source 名） */
+function galleryBadgeText(key){
+  var m = GALLERY_SOURCE_BADGE_MAP[key] || { en: key };
+  return (curLang() === 'zh') ? (m.zh || m.en) : m.en;
 }
 
 /* 判断某个视频 item 是否需要用 <iframe> 播放
    （凡是"embed 网页型"视频源都属于此类，与 source 类型解耦，
-    以后加 vimeo/bilibili 等，只需要把对应 source 加进这个数组） */
-const IFRAME_VIDEO_SOURCES = ['drive', 'youtube'];
+    以后加 vimeo 等，只需要把对应 source 加进这个数组） */
+const IFRAME_VIDEO_SOURCES = ['drive', 'youtube', 'bilibili'];
 
-/* 渲染 Gallery 列表；filters = {type:'all'|'photo'|'video', source:'all'|'local'|'drive'|'youtube'} */
-function renderGallery(containerId, data, filters = {type:'all', source:'all'}){
+/* 来源徽章文案：单来源显示一个，多平台用 " · " 连接 */
+function galleryBadgeLabel(item){
+  return gallerySources(item)
+    .map(s => galleryBadgeText(s.source))
+    .join(' · ');
+}
+
+/* 渲染 Gallery 列表；filters = {type, category, source}，各自可取 'all' */
+function renderGallery(containerId, data, filters = {type:'all', category:'all', source:'all'}){
   const el = document.getElementById(containerId);
   if(!el) return;
 
@@ -252,26 +288,34 @@ function renderGallery(containerId, data, filters = {type:'all', source:'all'}){
   if(filters.type && filters.type !== 'all'){
     list = list.filter(g => g.type === filters.type);
   }
+  if(filters.category && filters.category !== 'all'){
+    list = list.filter(g => g.category === filters.category);
+  }
   if(filters.source && filters.source !== 'all'){
-    list = list.filter(g => g.source === filters.source);
+    list = list.filter(g => gallerySources(g).some(s => s.source === filters.source));
   }
 
+  // 按日期降序 —— 最新在前（sortByDateDesc 见文件末尾，函数声明会提升）
+  list = sortByDateDesc(list, 'date');
+
   if(list.length === 0){
-    el.innerHTML = `<p style="grid-column:1/-1;text-align:center;color:var(--text-3);padding:2rem 0">
-      ${(typeof t === 'function') ? t('gallery.empty') : 'No items match this filter'}
-    </p>`;
+    el.innerHTML = `<p style="grid-column:1/-1;text-align:center;color:var(--text-3);padding:2rem 0">${t('gallery.empty')}</p>`;
     window.__currentGalleryList = [];
     return;
   }
 
   el.innerHTML = list.map((g, i) => {
+    // 徽章查表，找不到则给一个兜底文案（避免未来漏配置时页面报错/空白）
+    const badge = galleryBadgeLabel(g);
+    const caption = pick(g, 'caption') || '';
+
     return `
     <div class="gal-item" onclick="openLightboxByIndex(${i})">
       ${g.type === 'video'
-        ? `<img src="${g.thumb}" alt="${pick(g, 'caption') || ''}"><div class="gal-play">▶</div>`
-        : `<img src="${g.src}" alt="${pick(g, 'caption') || ''}">`}
-      <span class="gal-source-badge">${galleryBadgeText(g.source)}</span>
-      <div class="gal-caption">${pick(g, 'caption') || ''}</div>
+        ? `<img src="${g.thumb}" alt="${caption}" loading="lazy" decoding="async"><div class="gal-play">▶</div>`
+        : `<img src="${g.thumb || g.src}" alt="${caption}" loading="lazy" decoding="async">`}
+      <span class="gal-source-badge">${badge}</span>
+      <div class="gal-caption">${caption}</div>
     </div>
   `;
   }).join('');
@@ -285,21 +329,49 @@ function openLightboxByIndex(idx){
 }
 
 /* 核心修复：判断视频用 <iframe> 还是 <video> 标签
-   - IFRAME_VIDEO_SOURCES 里的 source（drive / youtube）→ <iframe>
+   - IFRAME_VIDEO_SOURCES 里的 source（drive / youtube / bilibili）→ <iframe>
    - 其余（例如 source==='local' 且直接存的是 .mp4 文件）→ <video> 标签 */
+function iframeFor(src){
+  return `<iframe src="${src}" width="800" height="480" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen frameborder="0"></iframe>`;
+}
+
 function openLightbox(item){
   const lb = document.getElementById('lightbox');
   const body = document.getElementById('lightboxBody');
   if(!lb || !body) return;
 
-  if(item.type === 'video' && IFRAME_VIDEO_SOURCES.includes(item.source)){
-    body.innerHTML = `<iframe src="${item.src}" width="800" height="480" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen frameborder="0"></iframe>`;
+  const srcs = gallerySources(item);
+
+  if(item.type === 'video' && srcs.some(s => IFRAME_VIDEO_SOURCES.includes(s.source))){
+    let html = '';
+    // 多平台（如 YouTube + Bilibili）→ 顶部给一排切换按钮
+    if(srcs.length > 1){
+      html += '<div class="lb-src-tabs">';
+      srcs.forEach((s, i) => {
+        html += `<button class="lb-src-btn${i === 0 ? ' active' : ''}" data-i="${i}" onclick="lbSwitchSource(${i})">${galleryBadgeText(s.source)}</button>`;
+      });
+      html += '</div>';
+    }
+    html += `<div id="lbFrameWrap">${iframeFor(srcs[0].src)}</div>`;
+    body.innerHTML = html;
+    window.__lbSrcs = srcs;
   } else if(item.type === 'video'){
     body.innerHTML = `<video src="${item.src}" controls autoplay></video>`;
   } else {
-    body.innerHTML = `<img src="${item.src}" alt="${pick(item, 'caption') || ''}">`;
+    body.innerHTML = `<img src="${item.src}" alt="${item.caption || ''}">`;
   }
   lb.classList.add('open');
+}
+
+/* 切换多平台视频的播放源（灯箱内） */
+function lbSwitchSource(i){
+  const srcs = window.__lbSrcs || [];
+  if(!srcs[i]) return;
+  const wrap = document.getElementById('lbFrameWrap');
+  if(wrap) wrap.innerHTML = iframeFor(srcs[i].src);
+  document.querySelectorAll('.lb-src-btn').forEach(b => {
+    b.classList.toggle('active', Number(b.dataset.i) === i);
+  });
 }
 
 function closeLightbox(){
@@ -355,13 +427,18 @@ const NEWS_BADGE_MAP = {
   tool:        { label: "Tool / Release", cls: "news-badge-tool" }
 };
 
-/* News 徽章 / 分类标签 / 链接文案：统一从 i18n.js 读取（中英文双语），
-   未知分类回退到原始 category key。tabs 与 badge 共用同一套键 news.cat.* */
+/* News 徽章中文案（与 i18n.js 的 news.cat.* 同源，缺失时回退英文 label） */
+const NEWS_BADGE_LABEL_ZH = {
+  publication: "论文", grant: "基金", award: "奖项", talk: "报告",
+  media: "媒体", team: "团队", tool: "工具 / 发布"
+};
 function newsBadgeLabel(cat){
-  var k = 'news.cat.' + cat;
-  var v = (typeof t === 'function') ? t(k) : k;
-  return (v === k) ? cat : v;
+  var m = NEWS_BADGE_MAP[cat] || { label: cat, cls: "news-badge-team" };
+  if(curLang() === 'zh') return NEWS_BADGE_LABEL_ZH[cat] || m.label;
+  return m.label;
 }
+
+/* News 默认「阅读更多」文案（数据未提供 linkText 时） */
 function newsReadMoreText(){
   return (typeof t === 'function') ? t('news.readmore') : 'Read more →';
 }
@@ -375,7 +452,7 @@ function renderNews(containerId, data) {
   if (!container) return;
 
   if (!data || data.length === 0) {
-    container.innerHTML = `<p class="news-empty">${(typeof t === 'function') ? t('news.empty') : 'No news items in this category yet.'}</p>`;
+    container.innerHTML = `<p class="news-empty">${t('news.empty')}</p>`;
     return;
   }
 
@@ -386,7 +463,7 @@ function renderNews(containerId, data) {
   years.forEach(year => {
     html += `<div class="news-year-label">${year}</div>`;
     sorted.filter(item => getYearFromItem(item) === year).forEach(item => {
-      const badge = NEWS_BADGE_MAP[item.category] || { cls: "news-badge-team" };
+      const badge = NEWS_BADGE_MAP[item.category] || { label: item.category, cls: "news-badge-team" };
       html += `
         <div class="news-item">
           <div class="news-date">${pick(item, 'date')}</div>
@@ -411,6 +488,17 @@ function renderNewsTabs(tabsContainerId, timelineContainerId, data) {
   if (!tabsContainer) return;
 
   const categoryOrder = ["all", "publication", "grant", "award", "talk", "media", "team", "tool"];
+  const categoryLabels = {
+    all:          { en: "All",           zh: "全部" },
+    publication:  { en: "Publication",   zh: "论文" },
+    grant:        { en: "Grant",         zh: "基金" },
+    award:        { en: "Award",         zh: "奖项" },
+    talk:         { en: "Talk",          zh: "报告" },
+    media:        { en: "Media",         zh: "媒体" },
+    team:         { en: "Team",          zh: "团队" },
+    tool:         { en: "Tool / Release", zh: "工具 / 发布" }
+  };
+  const catLabel = (cat) => (curLang() === 'zh') ? (categoryLabels[cat].zh) : (categoryLabels[cat].en);
 
   const counts = { all: data.length };
   categoryOrder.slice(1).forEach(cat => {
@@ -422,7 +510,7 @@ function renderNewsTabs(tabsContainerId, timelineContainerId, data) {
     const activeClass = cat === "all" ? " active" : "";
     html += `
       <button class="news-tab${activeClass}" data-category="${cat}">
-        ${newsBadgeLabel(cat)}
+        ${catLabel(cat)}
         <span class="news-tab-count">${counts[cat]}</span>
       </button>`;
   });
@@ -448,7 +536,7 @@ function renderNewsHighlights(containerId, data, count = 3) {
   if (!el) return;
 
   if (!data || data.length === 0) {
-    el.innerHTML = `<p class="news-empty">${(typeof t === 'function') ? t('news.empty') : 'No news items yet.'}</p>`;
+    el.innerHTML = `<p class="news-empty">${t('news.empty')}</p>`;
     return;
   }
 

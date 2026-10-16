@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Jian Wu - Tutorials &amp; Podcast</title>
+    <link>https://jianwu-atlas.github.io/tutorials.html</link>
+    <description>Latest tutorials and podcast episodes by Jian Wu (lung cell atlas, TE/ERV, aging).</description>
+    <language>zh-cn</language>
+
+    <item>
+      <title>如何查看jwtools包里有哪些可用函数</title>
+      <link>https://jianwu-atlas.github.io/tutorials/1_查看jwtools有哪些函数.html</link>
+      <guid isPermaLink="true">https://jianwu-atlas.github.io/tutorials/1_查看jwtools有哪些函数.html</guid>
+      <pubDate>Thu, 16 Jul 2026 00:00:00 +0000</pubDate>
+      <description>介绍 6 种在 R 中查找已安装包导出函数的方法，从 ls() 到 NAMESPACE 源码核查，并以自建包 jwtools 为例演示。</description>
+    </item>
+
+    <item>
+      <title>如何把新函数整合成jwtools函数</title>
+      <link>https://jianwu-atlas.github.io/tutorials/2_1-如何把新函数整合成jwtools函数.html</link>
+      <guid isPermaLink="true">https://jianwu-atlas.github.io/tutorials/2_1-如何把新函数整合成jwtools函数.html</guid>
+      <pubDate>Fri, 17 Jul 2026 00:00:00 +0000</pubDate>
+      <description>记录如何将新写的 R 函数按 roxygen2 + testthat 规范整合进 jwtools 包，含依赖声明、文档生成与测试流程。</description>
+    </item>
+
+    <item>
+      <title>Illumina BaseSpace: scRNA-seq Analysis with the DRAGEN Pipeline</title>
+      <link>https://jianwu-atlas.github.io/tutorials/2_2-Illumina BaseSpace.html</link>
+      <guid isPermaLink="true">https://jianwu-atlas.github.io/tutorials/2_2-Illumina BaseSpace.html</guid>
+      <pubDate>Wed, 29 Jul 2026 00:00:00 +0000</pubDate>
+      <description>介绍如何在 Illumina BaseSpace 平台上使用 DRAGEN Single Cell RNA 流程分析 scRNA-seq 数据，涵盖账号注册、CLI 安装配置，以及项目文件的上传下载操作。</description>
+    </item>
+
+  </channel>
+</rss>
