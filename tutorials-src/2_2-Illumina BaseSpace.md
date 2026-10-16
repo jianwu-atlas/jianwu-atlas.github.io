@@ -4,8 +4,8 @@ date: 2026-07-29
 summary: "介绍如何在 Illumina BaseSpace 平台上使用 DRAGEN Single Cell RNA 流程分析 scRNA-seq 数据，涵盖账号注册、CLI 安装配置，以及项目文件的上传下载操作。"
 type: tutorial
 tags: ["Jian Wu", "jwtools", "Illumina", "BaseSpace", "DRAGEN", "scRNA-seq", "CLI"]
-cover: "https://jianwu-atlas.github.io/assets/img/logos/wu_jian_lockup.png"
-#cover: "https://jianwu-atlas.github.io/assets/img/logos/wu_jian_lockup.png"
+cover: "https://jianwu-atlas.github.io/assets/img/logos/jianwu_social_preview.png"
+#cover: "https://jianwu-atlas.github.io/assets/img/logos/jwtools_logo_social_preview.png"
 #cover: "https://github.com/jianwu-atlas/jwtools/raw/main/man/figures/logo.png"
 ---
 

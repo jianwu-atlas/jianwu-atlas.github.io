@@ -102,7 +102,9 @@ def parse_front_matter(raw_text: str, filename: str) -> tuple[dict, str]:
 
     meta.setdefault("tags", [])
     meta.setdefault("type", DEFAULT_TYPE)
-    meta.setdefault("cover", "")
+    # 未显式写 cover 的新文章，默认使用新版 吴坚.png lockup；
+    # 旧文章各自保留了显式的（旧）cover，不受此默认值影响。
+    meta.setdefault("cover", "https://jianwu-atlas.github.io/assets/img/logos/wu_jian_lockup.png")
     meta.setdefault("draft", False)
     # 可选英文覆盖字段（教程以中文为主）：存在即写入 tutorials.js 的 title_en/summary_en，
     # 由 render.js 的 pickEn() 在英文模式下优先取用；缺失则回退中文 title/summary 正文。

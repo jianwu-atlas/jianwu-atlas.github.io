@@ -4,7 +4,7 @@ date: 2026-07-16
 summary: "介绍 6 种在 R 中查找已安装包导出函数的方法，从 ls() 到 NAMESPACE 源码核查，并以自建包 jwtools 为例演示。"
 type: tutorial
 tags: ["Jian Wu", "R", "jwtools", 'R包开发']
-cover: "https://jianwu-atlas.github.io/assets/img/logos/wu_jian_lockup.png"
+cover: "https://jianwu-atlas.github.io/assets/img/logos/jwtools_logo_social_preview.png"
 ---
 
 在 R 中查找 `jwtools` 包里有哪些可用函数，有几种常用方法，按推荐程度列出：

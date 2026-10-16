@@ -4,8 +4,8 @@ date: 2026-07-30
 summary: "DRAGEN Single Cell RNA 分析踩坑记录：BaseSpace 表单必填项排查、PIPseq 条码架构解读、UMI 长度异常核实全过程。"
 type: tutorial
 tags: ["Jian Wu", "jwtools", "PH project", "DRAGEN", "Illumina"]
-cover: "https://jianwu-atlas.github.io/assets/img/logos/wu_jian_lockup.png"
-#cover: "https://jianwu-atlas.github.io/assets/img/logos/wu_jian_lockup.png"
+cover: "https://jianwu-atlas.github.io/assets/img/logos/jianwu_social_preview.png"
+#cover: "https://jianwu-atlas.github.io/assets/img/logos/jwtools_logo_social_preview.png"
 #cover: "https://github.com/jianwu-atlas/jwtools/raw/main/man/figures/logo.png"
 ---
 

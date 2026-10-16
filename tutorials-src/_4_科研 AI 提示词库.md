@@ -5,7 +5,7 @@ summary: "科研 AI 提示词库：代码调试 / 图表规范 / 论文写作全
 type: tutorial
 tags: ["Jian Wu", "jwtools", "AI提示词",'科研效率', '代码调试']
 #cover: "https://github.com/jianwu-atlas/jwtools/raw/main/man/figures/logo.png"
-cover: "https://jianwu-atlas.github.io/assets/img/logos/wu_jian_lockup.png"
+cover: "https://jianwu-atlas.github.io/assets/img/logos/jianwu_social_preview.png"
 ---
 
 完整代码? 从最开始处 加上详细备注信息
