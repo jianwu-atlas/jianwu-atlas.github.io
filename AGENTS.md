@@ -6,6 +6,18 @@
 - **纯职业导向**：导航/正文围绕研究、发表、会议、专长、教程、新闻。
 - 个人兴趣（如德语学习）只以**低调 footer 链接**呈现，不进主导航，避免稀释专业印象。
 
+## ⚠️ 与私有站 jianwu-atlas-private 的刻意差异（同步时勿覆盖）
+两站共用同一套 CSS/JS/构建脚本，但以下三点**故意不同**，从私有库 `cp` 文件过来时必须保留本站版本：
+| 项 | 公开站（本站） | 私有站 |
+| -- | -- | -- |
+| hero 大 logo | `assets/img/logos/Jian_Wu_logo.png`（lungs lockup 1378×585） | `wu_jian_lockup.png`（吴坚书法版） |
+| 主导航语言站链接 | **没有**（只在首页 footer 低调呈现） | 有 Deutschheft / Englishheft |
+| `SITE_BASE_URL` | `https://jianwu-atlas.github.io` | `https://jianwu-atlas-private.jian-wu.workers.dev` |
+
+- 回归修复脚本（幂等、带命中次数断言）：`scripts/revert_public_nav_and_hero.py`
+  —— 恢复 hero lungs lockup、删主导航两个语言站链接、恢复首页 footer 语言站链接、把 og:image / twitter:image 对齐回 lungs lockup。
+- 历史教训（2026-10-17）：一次从私有库整文件 `cp`（含 `index.html` 与 9 个根页面）把上面三点全部覆盖，导致 hero 变书法版、语言站链接跑进主导航、首页 footer 链接被删。**同步只应 cp 明确需要同步的文件，且改完必须 `git diff <同步前commit> -- <file>` 复核**。
+
 ## 主要页面
 `index.html` / `experience.html` / `publications.html` / `conferences.html` / `expertise.html` / `tutorials.html` / `news.html` / `gallery.html` / `contact.html`；数据在 `assets/js/data/*.js`，渲染 `assets/js/render.js`。
 
@@ -33,6 +45,7 @@ python3 scripts/audit_images.py       # 图片引用审计:被引用 vs 孤儿
 - 上传新相册照片后**必须重跑** `optimize_gallery.py`，否则该图仍以原图体积进首屏。
 
 ## 最近更新
+- 2026-10-17（晚）：**回滚同步回归**（详见上方「刻意差异」节）——hero 恢复 `Jian_Wu_logo.png`；9 个根页面主导航移除 Deutschheft / Englishheft；首页 footer 语言站链接恢复；og:image / twitter:image 对齐回 lungs lockup。新增幂等修复脚本 `scripts/revert_public_nav_and_hero.py`。
 - 2026-10-17：性能与 SEO 收口——`build_tutorials.py` 自动生成 `sitemap.xml`（9 顶层页 + 全部教程详情页）与 `feed.xml`（RSS 最新 20 条）；新增 `scripts/optimize_gallery.py` / `add_lazy_loading.py` / `audit_images.py`；相册照片改 WebP 缩略图（`assets/img/gallery/thumbs/`，本库 46.98MB → 1.76MB，其中 `DZL 2025合照.jpg` 单张 27.92MB → 129KB）；全站 `<img>` 懒加载（129 张中 112 lazy / 17 首屏保持 eager）；新增 `404.html`。
 - 2026-10-15：`index.html` 的 `footer-copyright` 行新增个人链接 **Englishheft（个人 · 英语单词）** → https://jianwu-atlas.github.io/englishheft/（英语单词站同域子路径，与 Deutschheft 并列的姊妹站；内容为《15000 英语单词口袋书》蒸馏）。
 - 2026-10-15：全站接入中英文切换（i18n）——新增 `assets/js/i18n.js` + 导航右上角即时切换；9 个主页面与教程文章模板挂 `data-i18n`；`render.js` 加 `pick`/`pickEn`，数据文件补 `_zh` 字段；`build_tutorials.py` 支持可选 `title_en`/`summary_en`；图库英文 caption 补 `caption_zh`。
