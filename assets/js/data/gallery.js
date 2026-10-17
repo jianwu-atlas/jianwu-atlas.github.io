@@ -1,39 +1,4 @@
 const galleryData = [
-  /* ─── 影片（Films）—— 同一部片多平台合一：一张卡内含 YouTube + Bilibili 两个入口 ─── */
-  {
-    type: "video",
-    category: "Films",
-    date: "2026-10-12",
-    caption: "吴坚 & 肖维 婚礼蜜月影片｜婚礼 · 蜜月 · 4K",
-    thumb: "assets/img/gallery/thumbs/wedding-honeymoon-cover.webp",
-    sources: [
-      { source: "youtube",  src: "https://www.youtube.com/embed/COaOpLmc_iQ?start=0" },
-      { source: "bilibili", src: "https://player.bilibili.com/player.html?bvid=BV1L3p46FEDE&page=1&high_quality=1&danmaku=0" }
-    ]
-  },
-  {
-    type: "video",
-    category: "Films",
-    date: "2026-10-12",
-    caption: "吴坚 & 肖维 婚礼影片｜WEDDING DAY · 4K",
-    thumb: "assets/img/gallery/thumbs/wedding-day-cover.webp",
-    sources: [
-      { source: "youtube",  src: "https://www.youtube.com/embed/2d-WzuMwpW0?start=0" },
-      { source: "bilibili", src: "https://player.bilibili.com/player.html?bvid=BV1CJHd6pEdx&page=1&high_quality=1&danmaku=0" }
-    ]
-  },
-  {
-    type: "video",
-    category: "Films",
-    date: "2026-10-12",
-    caption: "吴坚 & 肖维 蜜月影片｜蜜月 · 大理 · 4K",
-    thumb: "assets/img/gallery/thumbs/honeymoon-dali-cover.webp",
-    sources: [
-      { source: "youtube",  src: "https://www.youtube.com/embed/iWVSWx9Ctc8?start=0" },
-      { source: "bilibili", src: "https://player.bilibili.com/player.html?bvid=BV1xjHd6xEHR&page=1&high_quality=1&danmaku=0" }
-    ]
-  },
-
   /* ─── 科研照片（Research · 本地 assets/img/gallery/） ─── */
   { type: "photo", thumb: "assets/img/gallery/thumbs/photo1.webp", category: "Research", date: "2026-07-07", source: "local", src: "assets/img/gallery/photo1.jpg", caption: "Jian Wu" },
   // 下面几张暂时没有实际文件，先注释掉，以后补上照片再取消注释
