@@ -6,6 +6,19 @@
 // ============================================================
 const newsData = [
     {
+    sortDate: "2026-10-19",
+    date: "Oct 19, 2026",
+    date_zh: "2026年10月19日",
+    category: "team",
+    title: "Lung Science Week 2026 — Helmholtz Munich (DataLung)",
+    title_zh: "2026 肺科学周（Lung Science Week）· 赫尔墨茨慕尼黑（DataLung）",
+    summary: "Invitation and full program for the DZL DataLung 'Introduction to Translational Lung Research' course, 19–23 October 2026 at the Helmholtz Munich campus — venue, transport, day-by-day schedule, and social events.",
+    summary_zh: "DZL DataLung「转化肺研究导论——肺生物学与生理学基础」课程（2026 年 10 月 19–23 日，赫尔墨茨慕尼黑校区 Neuherberg）的邀请函与完整日程：场地、交通、逐日议程与社交活动。",
+    link: "news/lung-science-week-2026.html",
+    linkText: "Read the full program →",
+    linkText_zh: "查看完整日程 →"
+  },
+    {
     sortDate: "2026-10-13",
     date: "Oct 13, 2026",
     date_zh: "2026年10月13日",

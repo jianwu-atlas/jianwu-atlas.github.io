@@ -110,6 +110,7 @@ var I18N = {
     "news.cat.team":    "Team",
     "news.cat.tool":    "Tool / Release",
     "news.readmore":    "Read more →",
+    "news.back":        "← Back to all news",
 
     /* ── Gallery ── */
     "title.gallery":    "Gallery | Jian Wu",
@@ -253,6 +254,7 @@ var I18N = {
     "news.cat.team":    "团队",
     "news.cat.tool":    "工具 / 发布",
     "news.readmore":    "阅读更多 →",
+    "news.back":        "← 返回全部新闻",
 
     /* ── Gallery ── */
     "title.gallery":    "相册 | 吴坚",
