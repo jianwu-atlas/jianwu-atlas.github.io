@@ -17,3 +17,9 @@ JackNg88.github.io-main.zip
 # 私人笔记，不推送、不上网站
 private-notes/
 *.bak_*
+
+# WorkBuddy「发布为应用」的本地标记文件（内部追踪用，不推送）
+.wbapp_*.genie
+.workbuddy/
+# WorkBuddy AI（国际版）记忆/配置目录 —— 含私有 AI 记忆，严禁推送/上线
+.workbuddy-ai/
