@@ -29,6 +29,8 @@
 - **静态 UI 文本**：元素加 `data-i18n="key"`（textContent）、`data-i18n-ph`（placeholder）、`data-i18n-title`（title）。
 - **数据驱动区块**（`assets/js/data/*.js` → `render.js`）：数据对象写 `field_zh` 中文备选，`render.js` 用 `pick(obj,'field')`（中文模式优先 `_zh`，缺失回退原字段）取值；切换语言时各页注册 `window.__langCallbacks.push(() => renderXxx(...))` 重渲染。
 - **教程（中文为主、可选英文）**：`tutorials-src/*.md` 单文件，Front Matter 可加 `title_en` / `summary_en`，`build_tutorials.py` 有值才写入 `tutorials.js`，`render.js` 用 `pickEn()` 在英文模式优先取 `_en`；不填则回退中文，**正文不翻译、无需两份文件**。
+- **正文整条切换**（与字段回退互补）：当两种语言是**整句不同**的独立文案（如语录、slogan），不做逐字段 `_zh`/`_en` 回退，而是让数据对象**同时**携带 `zh` 与 `en` 两个整串字段，`render.js` 按当前语言**整条**切换（`lang==='zh'?q.zh:q.en`）。**选型**：只有部分字段随语言变 → 用 `pick`/`pickEn` 回退；两种语言是不同完整句子 → 用整条切换。
+- **⚠️ `data-i18n` 的 textContent 陷阱**：`applyI18n()` 对带 `data-i18n` 的元素是**整段替换 `textContent`**，会**抹掉**其内的 `<a>`/子节点。「一行既有静态文案又要嵌链接」时，`<p>` 与 `<a>` 都**不要**挂 `data-i18n`，只把 `data-i18n` 挂在**内层 `<span>`** 上，链接结构切语言时天然存活。
 - 一次性迁移脚本 `scripts/add_i18n_marks.py`（`--apply` 才写入；默认 dry-run），每处替换断言恰好命中一次，避免误伤。
 - 新增英文文案先补 `i18n.js` 的 en/zh 两键，再在 HTML 挂 `data-i18n`；勿在页面硬编码双语。
 
@@ -45,6 +47,7 @@ python3 scripts/audit_images.py       # 图片引用审计:被引用 vs 孤儿
 - 上传新相册照片后**必须重跑** `optimize_gallery.py`，否则该图仍以原图体积进首屏。
 
 ## 最近更新
+- 2026-10-21：AGENTS.md「中英文切换 (i18n)」节补两条约定——①「正文整条切换」模型（数据对象同时带 `zh`+`en` 双整串字段，与 `pick`/`pickEn` 字段回退互补）；② `data-i18n` 的 `textContent` 陷阱（会抹掉内嵌 `<a>`，需内嵌链接时把 `data-i18n` 挂内层 `<span>`）。**纯文档改动，不影响公开网站任何可见内容。**
 - 2026-10-17（晚）：**回滚同步回归**（详见上方「刻意差异」节）——hero 恢复 `Jian_Wu_logo.png`；9 个根页面主导航移除 Deutschheft / Englishheft；首页 footer 语言站链接恢复；og:image / twitter:image 对齐回 lungs lockup。新增幂等修复脚本 `scripts/revert_public_nav_and_hero.py`。
 - 2026-10-17：性能与 SEO 收口——`build_tutorials.py` 自动生成 `sitemap.xml`（9 顶层页 + 全部教程详情页）与 `feed.xml`（RSS 最新 20 条）；新增 `scripts/optimize_gallery.py` / `add_lazy_loading.py` / `audit_images.py`；相册照片改 WebP 缩略图（`assets/img/gallery/thumbs/`，本库 46.98MB → 1.76MB，其中 `DZL 2025合照.jpg` 单张 27.92MB → 129KB）；全站 `<img>` 懒加载（129 张中 112 lazy / 17 首屏保持 eager）；新增 `404.html`。
 - 2026-10-15：`index.html` 的 `footer-copyright` 行新增个人链接 **Englishheft（个人 · 英语单词）** → https://jianwu-atlas.github.io/englishheft/（英语单词站同域子路径，与 Deutschheft 并列的姊妹站；内容为《15000 英语单词口袋书》蒸馏）。
