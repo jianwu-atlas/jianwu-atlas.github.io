@@ -11,6 +11,7 @@
 | 项 | 公开站（本站） | 私有站 |
 | -- | -- | -- |
 | hero 大 logo | `assets/img/logos/Jian_Wu_logo.png`（lungs lockup 1378×585） | `wu_jian_lockup.png`（吴坚书法版） |
+| 全站标识（导航/favicon/apple-touch/footer自标/教程页） | `assets/img/logos/jianwu_atlas_emblem.png`（公开学术徽章：肺 + JIAN WU RESEARCH GROUP 圆徽，深森林绿+铜） | `wu_jian_icon.png`（吴坚书法+鹿，**私人印记**） |
 | 主导航语言站链接 | **没有**（只在首页 footer 低调呈现） | 有 Deutschheft / Englishheft |
 | `SITE_BASE_URL` | `https://jianwu-atlas.github.io` | `https://jianwu-atlas-private.jian-wu.workers.dev` |
 
@@ -47,7 +48,8 @@ python3 scripts/audit_images.py       # 图片引用审计:被引用 vs 孤儿
 - 上传新相册照片后**必须重跑** `optimize_gallery.py`，否则该图仍以原图体积进首屏。
 
 ## 最近更新
-- 2026-10-25：**品牌色修正（饱和度问题，非色相问题）**——实测图标圆盘 #B0C090 仅 S25%（豆沙灰绿）、hero 肺锁扣的绿 S10–14%（灰绿），均远低于站点色板饱和度（#1B3A2D / #C17F5A，均 S≈53%）。按 Jian 选定**深紫方案**：`wu_jian_icon.png`（导航+favicon，13 页引用）→ 深紫圆盘 #6D28D9（S82%）+ 米白书法/签名/笔触 #F4EDDE + 浅紫鹿；`Jian_Wu_logo.png`（hero + og:image/twitter:image）→ 深森林绿（H150 S48）+ 铜金（H26 S58）。**同名文件整体替换，HTML 零改动**；改色方法：图标按亮度三段映射（暗→墨、中→鹿、亮→盘），hero 按 HSV 将绿/金像素分别重映射，保留原明暗结构。私有站不同步本站配色。
+- 2026-10-25（晚）：**公开站品牌标识重构——学术徽章上位，私人鹿盘退出公开站**（commit `da07a26`）。Jian 明确鹿盘（吴坚书法+鹿）是**私人 logo**，公开学术站须用公开徽章。① 新增 `assets/img/logos/jianwu_atlas_emblem.png`（512px，肺 + JIAN WU RESEARCH GROUP 圆徽，深森林绿 H150 S55 + 铜 H26 S62）作为全站标识：导航图标 / favicon / apple-touch / footer 自标 / 教程与新闻页品牌标，15 个页面 59 处引用整体切换，HTML 仅换文件名；② `jianwu_avatar_1000.png`（外部品牌资产）同款加深——**改仓库文件不会自动更新 GitHub 头像，需手动重传**；③ `wu_jian_icon.png` 恢复原版灰绿、公开站零引用（当日早先的深紫改色 `5d00524` 随之撤回）；④ root `apple-touch-icon.png` 换为徽章渲染图。另核实：鹿盘图标版底部签名被裁（完整 lockup 底部为「Wu Jian」花体+长横线，图标只剩「Wu」）——属私有站资产问题，本站未改。
+- 2026-10-25（早）：深紫方案改色 `wu_jian_icon.png` + hero 加深（commit `5d00524`）——**当日晚上已被 `da07a26` 取代**：该图标实为私人 logo，公开站改持学术徽章；hero 的深森林绿+铜加深版保留有效。
 - 2026-10-21：AGENTS.md「中英文切换 (i18n)」节补两条约定——①「正文整条切换」模型（数据对象同时带 `zh`+`en` 双整串字段，与 `pick`/`pickEn` 字段回退互补）；② `data-i18n` 的 `textContent` 陷阱（会抹掉内嵌 `<a>`，需内嵌链接时把 `data-i18n` 挂内层 `<span>`）。**纯文档改动，不影响公开网站任何可见内容。**
 - 2026-10-17（晚）：**回滚同步回归**（详见上方「刻意差异」节）——hero 恢复 `Jian_Wu_logo.png`；9 个根页面主导航移除 Deutschheft / Englishheft；首页 footer 语言站链接恢复；og:image / twitter:image 对齐回 lungs lockup。新增幂等修复脚本 `scripts/revert_public_nav_and_hero.py`。
 - 2026-10-17：性能与 SEO 收口——`build_tutorials.py` 自动生成 `sitemap.xml`（9 顶层页 + 全部教程详情页）与 `feed.xml`（RSS 最新 20 条）；新增 `scripts/optimize_gallery.py` / `add_lazy_loading.py` / `audit_images.py`；相册照片改 WebP 缩略图（`assets/img/gallery/thumbs/`，本库 46.98MB → 1.76MB，其中 `DZL 2025合照.jpg` 单张 27.92MB → 129KB）；全站 `<img>` 懒加载（129 张中 112 lazy / 17 首屏保持 eager）；新增 `404.html`。
