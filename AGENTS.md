@@ -1,6 +1,6 @@
 # AGENTS.md · jianwu-atlas.github.io（公网学术首页）
 
-> Jian 的**职业学术主页**（Bioinformatician / Lung Aging / LncRNA）。静态 HTML，push main 即发布到 https://jianwu-atlas.github.io/。私人版镜像在 `jianwu-atlas-private`。
+> Jian 的**职业学术主页**（Bioinformatician / Lung Cell Atlas Research）。静态 HTML，push main 即发布到 https://jianwu-atlas.github.io/。私人版镜像在 `jianwu-atlas-private`。
 
 ## 定位
 - **纯职业导向**：导航/正文围绕研究、发表、会议、专长、教程、新闻。

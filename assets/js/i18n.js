@@ -31,7 +31,7 @@ var I18N = {
     "footer.affil":     "Affiliated Institutions & Collaborators",
 
     /* ── 首页 ── */
-    "title.index":      "Jian Wu | Bioinformatician · Lung Aging · LncRNA Biology",
+    "title.index":      "Jian Wu | Bioinformatician · Lung Cell Atlas Research",
     "hero.pubs":        "View Publications",
     "hero.news":        "Latest News",
     "hero.tagline":     "Single-cell genomics for lung aging & chronic disease",
@@ -175,7 +175,7 @@ var I18N = {
     "footer.affil":     "合作机构",
 
     /* ── 首页 ── */
-    "title.index":      "吴坚 | 生物信息学家 · 肺衰老 · LncRNA 生物学",
+    "title.index":      "吴坚 | 生物信息学家 · 肺细胞图谱研究",
     "hero.pubs":        "查看论文",
     "hero.news":        "最新动态",
     "hero.tagline":     "用单细胞组学解码肺衰老与慢性疾病",
