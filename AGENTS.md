@@ -49,6 +49,7 @@ python3 scripts/audit_images.py       # 图片引用审计:被引用 vs 孤儿
 - 上传新相册照片后**必须重跑** `optimize_gallery.py`，否则该图仍以原图体积进首屏。
 
 ## 最近更新
+- 2026-10-25（深夜）：**学术徽章收紧版**（commit `2f3e6f8`）——Jian 反馈"公开网站 logo 空白太多"。实测三因：① 白底四角在深绿导航上成白块 → 环外改透明；② 内容仅占内环 93% → 按中心 ×1.05（401→421，不越内环 428）；③ 细外环在 42px 下亚像素不可见 → 加粗至 30px/1000px（≈1.3px@42px）。 artwork/配色/双环设计不变；apple-touch-icon.png 换白底 180px 渲染；`jianwu_avatar_1000.png` 同款更新（GitHub 头像需手动重传）。线上已验证（corner alpha=0）。
 - 2026-10-25（晚）：**公开站品牌标识重构——学术徽章上位，私人鹿盘退出公开站**（commit `da07a26`）。Jian 明确鹿盘（吴坚书法+鹿）是**私人 logo**，公开学术站须用公开徽章。① 新增 `assets/img/logos/jianwu_atlas_emblem.png`（512px，肺 + JIAN WU RESEARCH GROUP 圆徽，深森林绿 H150 S55 + 铜 H26 S62）作为全站标识：导航图标 / favicon / apple-touch / footer 自标 / 教程与新闻页品牌标，15 个页面 59 处引用整体切换，HTML 仅换文件名；② `jianwu_avatar_1000.png`（外部品牌资产）同款加深——**改仓库文件不会自动更新 GitHub 头像，需手动重传**；③ `wu_jian_icon.png` 恢复原版灰绿、公开站零引用（当日早先的深紫改色 `5d00524` 随之撤回）；④ root `apple-touch-icon.png` 换为徽章渲染图。另核实：鹿盘图标版底部签名被裁（完整 lockup 底部为「Wu Jian」花体+长横线，图标只剩「Wu」）——属私有站资产问题，本站未改。
 - 2026-10-25（早）：深紫方案改色 `wu_jian_icon.png` + hero 加深（commit `5d00524`）——**当日晚上已被 `da07a26` 取代**：该图标实为私人 logo，公开站改持学术徽章；hero 的深森林绿+铜加深版保留有效。
 - 2026-10-21：AGENTS.md「中英文切换 (i18n)」节补两条约定——①「正文整条切换」模型（数据对象同时带 `zh`+`en` 双整串字段，与 `pick`/`pickEn` 字段回退互补）；② `data-i18n` 的 `textContent` 陷阱（会抹掉内嵌 `<a>`，需内嵌链接时把 `data-i18n` 挂内层 `<span>`）。**纯文档改动，不影响公开网站任何可见内容。**
