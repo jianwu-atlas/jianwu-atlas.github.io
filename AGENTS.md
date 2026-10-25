@@ -24,6 +24,7 @@
 
 ## 部署
 - GitHub Pages：`git push` main 即发布（`*.github.io` 国内常不可达）。
+- 私有站 `jianwu-atlas-private`：Cloudflare Workers + **GitHub 自动部署**，push main 即部署（**勿手动 `wrangler deploy`**，纯冗余；实测 push 后约 16 秒自动部署完成）；全站在 Cloudflare Access 认证门后，curl/外网验证不了线上内容（返回 302）。
 
 ## 中英文切换 (i18n)
 - 语言包 + 切换逻辑在 `assets/js/i18n.js`：`I18N.{en,zh}` 字典，`t(key)` / `applyI18n()` / `toggleLang()`，存 `localStorage('lang')`，默认英文。
