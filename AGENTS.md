@@ -49,6 +49,7 @@ python3 scripts/audit_images.py       # 图片引用审计:被引用 vs 孤儿
 - 上传新相册照片后**必须重跑** `optimize_gallery.py`，否则该图仍以原图体积进首屏。
 
 ## 最近更新
+- 2026-10-25（晚）：**页脚合作机构 logo 重新排序**（Jian 定，两站同序）——自家徽章仍居最左且不参与排序；其后依次 Pullamsetti Lab → CPI → MPI HLR → DZL DataLung → JLU Gießen → IMPRS-MOB → ILH（原序是 JLU → MPI → CPI → DZL → IMPRS → ILH → Pullamsetti）。
 - 2026-10-25（晚）：**公开站彻底移除个人语言站链接**（Jian 决定）——`index.html` 页脚 `footer-copyright` 去掉 Deutschheft / Englishheft 两行，`404.html` 的移动导航里同款两行也一并删（那两行本就是同步事故遗留、与「公开站主导航不放语言站」的约定相悖）。回归脚本 `scripts/revert_public_nav_and_hero.py` 同步改造：footer 那段从「恢复」改为「删除」，`ROOT_PAGES` 补入 `404.html`，仍保持幂等（命中数断言）。私有站不动，语言站链接继续留在其主导航。
 - 2026-10-25（晚）：首页 SEO 文案统一到 Atlas 品牌——`meta description` / `og:description` / `twitter:description` / Schema.org Person `description` 与 `news.html` 描述改为以 "building single-cell lung cell atlases" 起句，保留 lung aging / COPD/IPF / LncRNA / ERV/TE 关键词。
 - 2026-10-25（深夜）：**学术徽章收紧版**（commit `2f3e6f8`）——Jian 反馈"公开网站 logo 空白太多"。实测三因：① 白底四角在深绿导航上成白块 → 环外改透明；② 内容仅占内环 93% → 按中心 ×1.05（401→421，不越内环 428）；③ 细外环在 42px 下亚像素不可见 → 加粗至 30px/1000px（≈1.3px@42px）。 artwork/配色/双环设计不变；apple-touch-icon.png 换白底 180px 渲染；`jianwu_avatar_1000.png` 同款更新（GitHub 头像需手动重传）。线上已验证（corner alpha=0）。
