@@ -1,21 +1,22 @@
 #!/usr/bin/env python3
-"""Revert two regressions that the private->public sync introduced into the
-PUBLIC repo only:
+"""Revert regressions that the private->public sync introduced into the PUBLIC
+repo only:
 
   1. index.html hero logo was switched from the legacy lungs lockup
      `assets/img/logos/Jian_Wu_logo.png` to the new calligraphy lockup
      `wu_jian_lockup.png`. The public site intentionally keeps the lungs
      lockup as its hero (documented difference vs. the private site).
   2. The "Deutschheft" / "Englishheft" links were added to the top navigation
-     bar of the 9 root pages. On the public site they belong in the footer
-     only (low-key presentation, per AGENTS.md positioning).
+     bar of the root pages. The public site carries NO links to the personal
+     language sites at all (2026-10-25 Jian: removed from the footer too), so
+     both the nav rows and the homepage footer rows must be absent here.
 
 Also realigns og:image / twitter:image back to the lungs lockup so the social
 share card matches the hero again.
 
 IDEMPOTENT: every replacement asserts an exact number of hits, so re-running
-is safe. The private repo is deliberately NOT touched -- there the nav links
-and the calligraphy hero are the intended design.
+is safe. The private repo is deliberately NOT touched -- there the nav links,
+the footer links and the calligraphy hero are the intended design.
 """
 from __future__ import annotations
 
@@ -34,6 +35,7 @@ ROOT_PAGES = [
     "experience.html",
     "conferences.html",
     "expertise.html",
+    "404.html",
 ]
 
 # The two nav rows the sync added (identical across all 9 root pages).
@@ -52,17 +54,17 @@ HERO_NEW = (
     '         class="hero-logo-img">'
 )
 
-# The same sync also stripped the language-site links out of the homepage
-# footer. On the public site they are supposed to live ONLY there (low-key
-# presentation, per AGENTS.md positioning), so restore them verbatim.
-FOOTER_OLD = (
-    '    <a href="https://orcid.org/0000-0003-4720-2374" target="_blank">ORCID</a>\n'
-    '  </div>'
-)
-FOOTER_NEW = (
+# The same sync also put the language-site links into the homepage footer.
+# 2026-10-25 Jian asked for them to be gone from the public site entirely, so
+# this step now REMOVES them (it used to restore them).
+FOOTER_WITH_LINKS = (
     '    <a href="https://orcid.org/0000-0003-4720-2374" target="_blank">ORCID</a> ·\n'
     '    <a href="https://jianwu-atlas.github.io/deutschheft/" target="_blank" rel="noopener">Deutschheft（个人 · 德语学习）</a> ·\n'
     '    <a href="https://jianwu-atlas.github.io/englishheft/" target="_blank" rel="noopener">Englishheft（个人 · 英语单词）</a>\n'
+    '  </div>'
+)
+FOOTER_CLEAN = (
+    '    <a href="https://orcid.org/0000-0003-4720-2374" target="_blank">ORCID</a>\n'
     '  </div>'
 )
 
@@ -109,9 +111,9 @@ t = replace_exact(
     '<meta name="twitter:image" content="https://jianwu-atlas.github.io/assets/img/logos/Jian_Wu_logo.png">',
     1, "index.html twitter:image",
 )
-t = replace_exact(t, FOOTER_OLD, FOOTER_NEW, 1, "index.html footer language links")
+t = replace_exact(t, FOOTER_WITH_LINKS, FOOTER_CLEAN, 1, "index.html footer language links")
 idx.write_text(t, encoding="utf-8")
 print("[ok] index.html: hero logo + og:image + twitter:image -> Jian_Wu_logo.png")
-print("[ok] index.html: footer language-site links restored")
+print("[ok] index.html: footer language-site links absent")
 
 print(f"\nDone. nav links removed from {nav_fixes} page(s); hero/social realigned.")

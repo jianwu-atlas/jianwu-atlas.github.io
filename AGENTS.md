@@ -4,7 +4,7 @@
 
 ## 定位
 - **纯职业导向**：导航/正文围绕研究、发表、会议、专长、教程、新闻。
-- 个人兴趣（如德语学习）只以**低调 footer 链接**呈现，不进主导航，避免稀释专业印象。
+- 个人兴趣（如德语学习）**在公开站完全不出现**（2026-10-25 Jian 决定：连 footer 链接也删掉；此前是「低调 footer 链接」）。语言站只在私有站主导航保留。
 
 ## ⚠️ 与私有站 jianwu-atlas-private 的刻意差异（同步时勿覆盖）
 两站共用同一套 CSS/JS/构建脚本，但以下三点**故意不同**，从私有库 `cp` 文件过来时必须保留本站版本：
@@ -12,11 +12,11 @@
 | -- | -- | -- |
 | hero 大 logo | `assets/img/logos/Jian_Wu_logo.png`（lungs lockup 1378×585） | `wu_jian_lockup.png`（吴坚书法版） |
 | 全站标识（导航/favicon/apple-touch/footer自标/教程页） | `assets/img/logos/jianwu_atlas_emblem.png`（公开学术徽章：肺 + JIAN WU RESEARCH GROUP 圆徽，深森林绿+铜） | `wu_jian_icon.png`（吴坚书法+鹿，**私人印记**） |
-| 主导航语言站链接 | **没有**（只在首页 footer 低调呈现） | 有 Deutschheft / Englishheft |
+| 主导航语言站链接 | **一个都没有**（导航与 footer 均无） | 有 Deutschheft / Englishheft |
 | `SITE_BASE_URL` | `https://jianwu-atlas.github.io` | `https://jianwu-atlas-private.jian-wu.workers.dev` |
 
 - 回归修复脚本（幂等、带命中次数断言）：`scripts/revert_public_nav_and_hero.py`
-  —— 恢复 hero lungs lockup、删主导航两个语言站链接、恢复首页 footer 语言站链接、把 og:image / twitter:image 对齐回 lungs lockup。
+  —— 恢复 hero lungs lockup、删主导航两个语言站链接、删首页 footer 语言站链接、把 og:image / twitter:image 对齐回 lungs lockup。
 - 历史教训（2026-10-17）：一次从私有库整文件 `cp`（含 `index.html` 与 9 个根页面）把上面三点全部覆盖，导致 hero 变书法版、语言站链接跑进主导航、首页 footer 链接被删。**同步只应 cp 明确需要同步的文件，且改完必须 `git diff <同步前commit> -- <file>` 复核**。
 
 ## 主要页面
@@ -49,6 +49,8 @@ python3 scripts/audit_images.py       # 图片引用审计:被引用 vs 孤儿
 - 上传新相册照片后**必须重跑** `optimize_gallery.py`，否则该图仍以原图体积进首屏。
 
 ## 最近更新
+- 2026-10-25（晚）：**公开站彻底移除个人语言站链接**（Jian 决定）——`index.html` 页脚 `footer-copyright` 去掉 Deutschheft / Englishheft 两行，`404.html` 的移动导航里同款两行也一并删（那两行本就是同步事故遗留、与「公开站主导航不放语言站」的约定相悖）。回归脚本 `scripts/revert_public_nav_and_hero.py` 同步改造：footer 那段从「恢复」改为「删除」，`ROOT_PAGES` 补入 `404.html`，仍保持幂等（命中数断言）。私有站不动，语言站链接继续留在其主导航。
+- 2026-10-25（晚）：首页 SEO 文案统一到 Atlas 品牌——`meta description` / `og:description` / `twitter:description` / Schema.org Person `description` 与 `news.html` 描述改为以 "building single-cell lung cell atlases" 起句，保留 lung aging / COPD/IPF / LncRNA / ERV/TE 关键词。
 - 2026-10-25（深夜）：**学术徽章收紧版**（commit `2f3e6f8`）——Jian 反馈"公开网站 logo 空白太多"。实测三因：① 白底四角在深绿导航上成白块 → 环外改透明；② 内容仅占内环 93% → 按中心 ×1.05（401→421，不越内环 428）；③ 细外环在 42px 下亚像素不可见 → 加粗至 30px/1000px（≈1.3px@42px）。 artwork/配色/双环设计不变；apple-touch-icon.png 换白底 180px 渲染；`jianwu_avatar_1000.png` 同款更新（GitHub 头像需手动重传）。线上已验证（corner alpha=0）。
 - 2026-10-25（晚）：**公开站品牌标识重构——学术徽章上位，私人鹿盘退出公开站**（commit `da07a26`）。Jian 明确鹿盘（吴坚书法+鹿）是**私人 logo**，公开学术站须用公开徽章。① 新增 `assets/img/logos/jianwu_atlas_emblem.png`（512px，肺 + JIAN WU RESEARCH GROUP 圆徽，深森林绿 H150 S55 + 铜 H26 S62）作为全站标识：导航图标 / favicon / apple-touch / footer 自标 / 教程与新闻页品牌标，15 个页面 59 处引用整体切换，HTML 仅换文件名；② `jianwu_avatar_1000.png`（外部品牌资产）同款加深——**改仓库文件不会自动更新 GitHub 头像，需手动重传**；③ `wu_jian_icon.png` 恢复原版灰绿、公开站零引用（当日早先的深紫改色 `5d00524` 随之撤回）；④ root `apple-touch-icon.png` 换为徽章渲染图。另核实：鹿盘图标版底部签名被裁（完整 lockup 底部为「Wu Jian」花体+长横线，图标只剩「Wu」）——属私有站资产问题，本站未改。
 - 2026-10-25（早）：深紫方案改色 `wu_jian_icon.png` + hero 加深（commit `5d00524`）——**当日晚上已被 `da07a26` 取代**：该图标实为私人 logo，公开站改持学术徽章；hero 的深森林绿+铜加深版保留有效。
