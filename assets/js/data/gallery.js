@@ -18,6 +18,8 @@ const galleryData = [
 
   { type: "photo", thumb: "assets/img/gallery/thumbs/DataLung 2026 合照.webp", category: "Research", date: "2026-05-12", source: "local", src: "assets/img/gallery/DataLung 2026 合照.jpeg", caption: "DataLung 2026 合照" },
 
+  { type: "photo", thumb: "assets/img/gallery/thumbs/JPMorgan2026-合照.webp", category: "Research", date: "2026-06-03", source: "local", src: "assets/img/gallery/JPMorgan2026-合照.jpeg", caption: "JPMorganChase Corporate Challenge 2026 合照" },
+
   { type: "photo", thumb: "assets/img/gallery/thumbs/DZL 2024 合照.webp", category: "Research", date: "2024-07-05", source: "local", src: "assets/img/gallery/DZL 2024 合照.jpg", caption: "DZL 2024 合照" },
 
   { type: "photo", thumb: "assets/img/gallery/thumbs/DZL 2025合照.webp", category: "Research", date: "2025-07-31", source: "local", src: "assets/img/gallery/DZL 2025合照.jpg", caption: "DZL 2025 合照" },

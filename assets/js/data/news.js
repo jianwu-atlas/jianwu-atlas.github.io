@@ -59,6 +59,19 @@ const newsData = [
     linkText_zh: "在 GitHub 上查看 →"
   },
   {
+    sortDate: "2026-06-03",
+    date: "Jun 3, 2026",
+    date_zh: "2026年6月3日",
+    category: "team",
+    title: "JPMorganChase Corporate Challenge Frankfurt 2026",
+    title_zh: "摩根大通企业挑战赛 · 法兰克福 2026",
+    summary: "Took part in the JPMorganChase Corporate Challenge in Frankfurt — a company running event at Opernplatz on Wednesday, 3 June 2026, starting at 7:00 p.m.",
+    summary_zh: "参加法兰克福 JPMorganChase Corporate Challenge 企业跑步活动——2026 年 6 月 3 日（周三）晚 7:00 于 Opernplatz 起跑。",
+    link: "https://www.jpmorganchasecc.com/en/home/our-locations/frankfurt",
+    linkText: "Event details →",
+    linkText_zh: "活动详情 →"
+  },
+  {
     sortDate: "2026-03-05",
     date: "Mar 5, 2026",
     date_zh: "2026年3月5日",
