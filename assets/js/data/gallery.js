@@ -17,7 +17,7 @@ const galleryData = [
   { type: "photo", thumb: "assets/img/gallery/thumbs/CRC Retreat 2025.webp", category: "Research", date: "2025-03-28", source: "local", src: "assets/img/gallery/CRC Retreat 2025.jpg", caption: "CRC Retreat 2025" },
 
   { type: "photo", thumb: "assets/img/gallery/thumbs/DataLung 2026 合照.webp", category: "Research", date: "2026-05-12", source: "local", src: "assets/img/gallery/DataLung 2026 合照.jpeg", caption: "DataLung 2026 合照" },
-  { type: "photo", thumb: "assets/img/gallery/thumbs/DataLung 2026 合照2.webp", category: "Research", date: "2026-05-12", source: "local", src: "assets/img/gallery/DataLung 2026 合照2.jpeg", caption: "DataLung 2026 合照 2" },
+  { type: "photo", thumb: "assets/img/gallery/thumbs/DataLung 2026 合照2.webp", category: "Research", date: "2026-10-21", source: "local", src: "assets/img/gallery/DataLung 2026 合照2.jpeg", caption: "DataLung 2026 合照 2" },
 
   { type: "photo", thumb: "assets/img/gallery/thumbs/JPMorgan2026-合照.webp", category: "Research", date: "2026-06-03", source: "local", src: "assets/img/gallery/JPMorgan2026-合照.jpeg", caption: "JPMorganChase Corporate Challenge 2026 合照" },
 
