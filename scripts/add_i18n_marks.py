@@ -96,8 +96,8 @@ PER_FILE = {
     'index.html': [
         # Page title
         (
-            '<title>Jian Wu | Bioinformatician · Lung Aging · LncRNA Biology</title>',
-            '<title data-i18n="title.index">Jian Wu | Bioinformatician · Lung Aging · LncRNA Biology</title>'
+            '<title>Jian Wu | Bioinformatician · Lung Aging · Multi-omics Integration</title>',
+            '<title data-i18n="title.index">Jian Wu | Bioinformatician · Lung Aging · Multi-omics Integration</title>'
         ),
         # Nav Home with active class
         (

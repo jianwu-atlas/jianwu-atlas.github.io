@@ -715,7 +715,7 @@ def write_feed(all_meta: list[dict], limit: int = 20) -> None:
         "    <title>Jian Wu - Tutorials &amp; Podcast</title>",
         f"    <link>{SITE_BASE_URL}/tutorials.html</link>",
         "    <description>Latest tutorials and podcast episodes by Jian Wu "
-        "(lung cell atlas, TE/ERV, aging).</description>",
+        "(single-cell data integration, lung cell atlas, aging).</description>",
         "    <language>zh-cn</language>",
         "",
     ]

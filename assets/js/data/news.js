@@ -52,8 +52,8 @@ const newsData = [
     category: "tool",
     title: "Introducing jwtools: An R Package for Single-Cell & Omics Utility Functions",
     title_zh: "jwtools 发布：单细胞与组学分析的 R 工具包",
-    summary: "Released jwtools, a personal R package formalizing reusable utility functions from daily single-cell and omics analysis work — starting with qs_save_workspace() and qs_load_workspace() for fast, memory-efficient workspace snapshots via the qs format. A living package, with future additions covering single-cell QC helpers, TE/ERV quantification utilities, and large-matrix data wrangling tools. Licensed under MIT.",
-    summary_zh: "发布 jwtools——把日常单细胞与组学分析中可复用的工具函数整理成的个人 R 包。首批功能为 qs_save_workspace() 与 qs_load_workspace()，基于 qs 格式实现快速、省内存的工作区快照。这是一个持续演进的包，后续将加入单细胞 QC 辅助、TE/ERV 定量以及大矩阵数据处理工具。MIT 许可证。",
+    summary: "Released jwtools, a personal R package formalizing reusable utility functions from daily single-cell and omics analysis work — starting with qs_save_workspace() and qs_load_workspace() for fast, memory-efficient workspace snapshots via the qs format. A living package, with future additions covering single-cell QC helpers and large-matrix data wrangling tools. Licensed under MIT.",
+    summary_zh: "发布 jwtools——把日常单细胞与组学分析中可复用的工具函数整理成的个人 R 包。首批功能为 qs_save_workspace() 与 qs_load_workspace()，基于 qs 格式实现快速、省内存的工作区快照。这是一个持续演进的包，后续将加入单细胞 QC 辅助与大矩阵数据处理工具。MIT 许可证。",
     link: "https://github.com/jianwu-atlas/jwtools",
     linkText: "View on GitHub →",
     linkText_zh: "在 GitHub 上查看 →"
@@ -125,7 +125,7 @@ const newsData = [
     date: "Feb 2025",
     category: "grant",
     title: "IMPRS-MOB Structured PhD Program — Confirmed Continuation",
-    summary: "Successful annual thesis committee review; continued funding confirmed for the LungAgingERV and HERV-eQTL-Lung-soloTE projects.",
+    summary: "Successful annual thesis committee review; continued funding confirmed for ongoing lung single-cell atlas projects.",
     link: "experience.html",
     linkText: "Full experience timeline →"
   },
@@ -135,8 +135,8 @@ const newsData = [
     sortDate: "2024-11-01",
     date: "Nov 2024",
     category: "publication",
-    title: "SoloTE-Based Structural Profiling of HERV Loci in Lung eQTL Data",
-    summary: "Manuscript submitted describing integration of soloTE with lung eQTL datasets to resolve locus-specific HERV expression regulation.",
+    title: "Locus-Level Structural Profiling in Lung eQTL Data",
+    summary: "Manuscript submitted describing structural profiling integrated with lung eQTL datasets to resolve locus-specific regulatory variation.",
     link: "publications.html",
     linkText: "View publication →"
   },

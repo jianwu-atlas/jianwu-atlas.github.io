@@ -9,7 +9,6 @@ const experienceData = [
     advisor:"Advisor: Prof. Soni Savai Pullamsetti · IMPRS-MOB Structured PhD Program",
     advisor_zh:"导师：Soni Savai Pullamsetti 教授 · IMPRS-MOB 结构化博士项目",
     points:[
-      // "ERV/HERV atlas of human lung aging across three integrated scRNA-seq cohorts (~370k cells)", //注释
       "Lung cell atlas construction integrating multi-cohort single-cell datasets",
       "Spatial transcriptomics profiling of lung cancer (Visium)",
       "Contributor to DZL DataLung School — data science training for pulmonary research community"

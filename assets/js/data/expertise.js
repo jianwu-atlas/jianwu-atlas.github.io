@@ -19,8 +19,6 @@ const expertiseData = [
       {type:"b", name:"Monocle 2"},
       {type:"b", name:"Slingshot"},
       {type:"b", name:"CellChat"}
-      // {type:"b", name:"lncRNA"}
-      // {type:"b", name:"soloTE · scTE"}
     ]
   },
   {
