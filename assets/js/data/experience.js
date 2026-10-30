@@ -71,14 +71,14 @@ const experienceData = [
     advisor:"Advisor: Prof. Duanqing Pei (GIBH)",
     advisor_zh:"导师：裴端卿 教授（中科院广州生物医药与健康研究院）",
     points:[
-      "Transposable elements (TEs) play an important role from hES to liver",
+      "Regulatory element dynamics during hESC-to-liver differentiation",
       "Exploring the mechanisms of cancer metastasis via circulating tumour cells (CTC)",
       "Efficient reprogramming of MEFs to iPSCs with alternative factors",
       "Chromatin accessibility dynamics during chemical induction of pluripotency",
       "Kdm2b regulates somatic reprogramming through variant PRC1 complex dependent function"
     ],
     points_zh:[
-      "转座子（TE）在人胚胎干细胞向肝脏发育过程中发挥重要作用",
+      "人胚胎干细胞向肝脏分化过程中的调控元件动态",
       "通过循环肿瘤细胞（CTC）探索癌症转移机制",
       "利用替代因子将小鼠胚胎成纤维细胞高效重编程为 iPSC",
       "化学诱导多能性过程中的染色质可及性动态",
@@ -86,7 +86,7 @@ const experienceData = [
     ],
     tags:[
       {type:"g",label:"Reprogramming"},{type:"g",label:"iPSCs"},{type:"c",label:"ATAC-seq"},
-      {type:"c",label:"ChIP-seq"},{type:"b",label:"TEs"},{type:"b",label:"CTC"}
+      {type:"c",label:"ChIP-seq"},{type:"b",label:"CTC"}
     ]
   }
 ];
