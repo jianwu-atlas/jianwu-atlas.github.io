@@ -304,12 +304,22 @@ function renderGallery(containerId, data, filters = {type:'all', category:'all',
     return;
   }
 
-  el.innerHTML = list.map((g, i) => {
+  // 按年份分组：list 已按日期降序，年份标题自然降序。
+  // 只插入标题、不重排数组，因此 openLightboxByIndex(i) 的索引仍与 list 一一对应。
+  let html = '';
+  let currentYear = null;
+  list.forEach((g, i) => {
+    const year = (g.date || '').slice(0, 4) || 'Undated';
+    if (year !== currentYear) {
+      currentYear = year;
+      html += `<div class="gal-year-label">${year}</div>`;
+    }
+
     // 徽章查表，找不到则给一个兜底文案（避免未来漏配置时页面报错/空白）
     const badge = galleryBadgeLabel(g);
     const caption = pick(g, 'caption') || '';
 
-    return `
+    html += `
     <div class="gal-item" onclick="openLightboxByIndex(${i})">
       ${g.type === 'video'
         ? `<img src="${g.thumb}" alt="${caption}" loading="lazy" decoding="async"><div class="gal-play">▶</div>`
@@ -318,7 +328,9 @@ function renderGallery(containerId, data, filters = {type:'all', category:'all',
       <div class="gal-caption">${caption}</div>
     </div>
   `;
-  }).join('');
+  });
+
+  el.innerHTML = html;
 
   window.__currentGalleryList = list;
 }

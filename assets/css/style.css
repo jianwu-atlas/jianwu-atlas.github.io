@@ -227,7 +227,7 @@ body.dark .sec-title{color:var(--copper-light)}
 /* Tutorials 年份分组标题（仅在 tutorials.html 完整列表页使用，
    由 render.js 的 renderTutorials(..., { groupByYear:true }) 插入）
    —— grid-column:1/-1 让它跨越 .tut-grid 的整行，而不是被当成一张卡片 */
-.tut-year-label{
+.tut-year-label,.gal-year-label{
   grid-column:1 / -1;
   font-family:'Cormorant Garamond',serif;
   font-size:1.4rem;
@@ -237,10 +237,13 @@ body.dark .sec-title{color:var(--copper-light)}
   padding:1.4rem 0 .5rem;
   margin:0;
 }
-.tut-year-label:first-child{padding-top:0}
-body.dark .tut-year-label{color:var(--copper-light)}
+.tut-year-label:first-child,.gal-year-label:first-child{padding-top:0}
+body.dark .tut-year-label,body.dark .gal-year-label{color:var(--copper-light)}
 
 /* ─── Gallery ─── */
+/* 年份分组标题：复用 .tut-year-label 的规则，仅把字号与内距调小
+   （相册条目比教程卡片密，1.4rem 会显得过重） */
+.gal-year-label{font-size:1.2rem;padding:1.1rem 0 .4rem}
 .gal-tabs-row{display:flex;gap:.5rem;margin-bottom:.75rem;flex-wrap:wrap;align-items:center}
 .gal-tabs-row:last-of-type{margin-bottom:1.25rem}
 .gal-tab-label{font-size:.68rem;color:var(--text-3);letter-spacing:.05em;text-transform:uppercase;align-self:center;margin-right:.3rem}
