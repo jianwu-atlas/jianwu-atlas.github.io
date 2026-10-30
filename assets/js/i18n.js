@@ -31,11 +31,11 @@ var I18N = {
     "footer.affil":     "Affiliated Institutions & Collaborators",
 
     /* ── 首页 ── */
-    "title.index":      "Jian Wu | Bioinformatician · Lung Cell Atlas Research",
+    "title.index":      "Jian Wu | Single-cell Data Integration · Lung Cell Atlas Research",
     "hero.pubs":        "View Publications",
     "hero.news":        "Latest News",
-    "hero.tagline":     "Single-cell genomics for lung aging & chronic disease",
-    "hero.sub":         "Bioinformatician at CPI / MPI-BN / JLU — lung cell atlas construction, spatial transcriptomics, and reproducible multi-dataset integration.",
+    "hero.tagline":     "Single-cell data integration for lung aging & disease",
+    "hero.sub":         "Bioinformatician at CPI / MPI-BN / JLU — reproducible integration of single-cell and spatial lung atlases.",
     "profile.title":    "Bioinformatician",
     "sb.interests":     "Research Interests",
     "int.1":            "Lung Aging & Chronic Disease (COPD / IPF)",
@@ -175,11 +175,11 @@ var I18N = {
     "footer.affil":     "合作机构",
 
     /* ── 首页 ── */
-    "title.index":      "吴坚 | 生物信息学家 · 肺细胞图谱研究",
+    "title.index":      "吴坚 | 单细胞数据整合 · 肺细胞图谱研究",
     "hero.pubs":        "查看论文",
     "hero.news":        "最新动态",
-    "hero.tagline":     "用单细胞组学解码肺衰老与慢性疾病",
-    "hero.sub":         "现就职于 CPI / MPI-BN / JLU，研究方向包括肺细胞图谱构建、空间转录组学与可复现的多数据集整合。",
+    "hero.tagline":     "面向肺衰老与疾病的多数据集单细胞整合",
+    "hero.sub":         "现就职于 CPI / MPI-BN / JLU，专注单细胞与空间图谱的可复现整合。",
     "profile.title":    "生物信息学家",
     "sb.interests":     "研究方向",
     "int.1":            "肺衰老与慢性疾病（COPD / IPF）",
