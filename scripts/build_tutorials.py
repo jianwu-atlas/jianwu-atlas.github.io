@@ -116,7 +116,7 @@ REPO_ROOT = Path(__file__).resolve().parent.parent  # parent of scripts/ = repo 
 TUTORIALS_SRC_DIR   = REPO_ROOT / "tutorials-src"
 TUTORIALS_OUT_DIR   = REPO_ROOT / "tutorials"
 TUTORIALS_JS_PATH   = REPO_ROOT / "assets" / "js" / "data" / "tutorials.js"
-TUTORIAL_TEMPLATE   = REPO_ROOT / "assets" / "templates" / "tutorial_template.html"
+TUTORIAL_TEMPLATE   = REPO_ROOT / "tutorials" / "tutorial_template.html"
 
 REQUIRED_FIELDS = ["title", "date", "summary", "type"]
 DEFAULT_TYPE    = "tutorial"
