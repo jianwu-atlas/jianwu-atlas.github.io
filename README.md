@@ -230,4 +230,4 @@ python3 -m http.server 8000
 
 ---
 
-© 2025 Jian Wu · CPI / MPI-BN · JLU Gießen · DZL / ILH
+© 2025 Jian Wu · CPI / MPI-HLR · JLU Gießen · DZL / ILH

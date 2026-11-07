@@ -3,7 +3,7 @@ const experienceData = [
     icon:"🫁",
     role:"Research Scientist / Doctoral Researcher",
     role_zh:"研究科学家 / 博士研究生",
-    org:"Cardio-Pulmonary Institute (CPI) · Max Planck Institute for Heart and Lung Research (MPI-BN) · Justus-Liebig-Universität Gießen (JLU) · German Center for Lung Research (DZL) · Institute for Lung Health (ILH)",
+    org:"Cardio-Pulmonary Institute (CPI) · Max Planck Institute for Heart and Lung Research (MPI-HLR) · Justus-Liebig-Universität Gießen (JLU) · German Center for Lung Research (DZL) · Institute for Lung Health (ILH)",
     date:"2024 – Present · Gießen / Bad Nauheim, Germany",
     date_zh:"2024 – 至今 · 德国 吉森 / 巴特瑙海姆",
     advisor:"Advisor: Prof. Soni Savai Pullamsetti · IMPRS-MOB Structured PhD Program",
