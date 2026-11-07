@@ -87,7 +87,7 @@ FOOTER_NEW = '''<footer class="site-footer">
         <img src="assets/img/logos/dzl-datalung.png" alt="Deutsches Zentrum für Lungenforschung - DataLung School">
       </a>
 
-      <a href="https://www.imprs-mob.de/" target="_blank" rel="noopener" class="footer-logo-item" title="IMPRS for Molecular Organ Biology">
+      <a href="https://imprs-mob.mpg.de/" target="_blank" rel="noopener" class="footer-logo-item" title="IMPRS for Molecular Organ Biology">
         <img src="assets/img/logos/imprs-mob.png" alt="IMPRS for Molecular Organ Biology">
       </a>
 
