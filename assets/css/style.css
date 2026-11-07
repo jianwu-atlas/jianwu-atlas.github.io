@@ -1056,3 +1056,18 @@ body.dark .slide-download-btn:hover {
   .tut-article-body h3{ font-size: 1.1rem; }
   .tut-article-body pre{ font-size: 0.78rem; padding: 0.85rem 1rem; }
 }
+
+/* ── 能力横幅（expertise.html）─────────────────────────────
+   矢量为主、WebP 后备；移动端隐藏（1814×440 缩到 350px 会糊）。 */
+.banner-wrap{
+  margin-bottom:1.5rem;
+  border-radius:var(--radius);
+  overflow:hidden;
+  box-shadow:var(--shadow);
+  background:var(--card);
+}
+.banner-wrap img{ display:block; width:100%; height:auto; }
+
+@media (max-width:640px){
+  .banner-wrap{ display:none; }
+}
